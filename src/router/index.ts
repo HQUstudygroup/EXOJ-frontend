@@ -2,14 +2,25 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     {
+        name: 'index',
         path: '/',
-        name: 'Home',
-        component: import('@/components/HelloWorld.vue'),
+        redirect: '/home',
     },
     {
-        path: '/about',
-        name: 'About',
-        component: import('@/components/About.vue'),
+        path: '/',
+        component: import('@/layout/DefaultLayout.vue'),
+        children: [
+            {
+                name: 'home',
+                path: 'home',
+                component: import('@/view/HomeView.vue'),
+            },
+        ],
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: import('@/view/NotFoundView.vue'),
     },
 ];
 
