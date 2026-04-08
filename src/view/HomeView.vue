@@ -4,6 +4,6 @@
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup Lang="ts"></script>
 
 <style scoped></style>
