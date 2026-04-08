@@ -4,7 +4,6 @@
         <n-layout has-sider class="flex-1">
             <n-layout-sider
                 bordered
-                content-style="padding: 24px;"
                 :native-scrollbar="false"
                 collapse-mode="width"
                 show-trigger="arrow-circle"
@@ -12,7 +11,7 @@
                 collapsed-trigger-style="top: 250px; right: -25px"
                 trigger-style="top: 250px"
             >
-                SideBar
+                <aside-area></aside-area>
             </n-layout-sider>
             <n-layout-content bordered content-class="p-18" :native-scrollbar="false">
                 <router-view />
@@ -21,6 +20,8 @@
     </n-layout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import AsideArea from '@/components/SideBar/AsideArea.vue';
+</script>
 
 <style scoped></style>
