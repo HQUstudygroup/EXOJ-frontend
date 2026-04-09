@@ -8,24 +8,39 @@ const routes = [
     },
     {
         path: '/',
-        component: import('@/layout/DefaultLayout.vue'),
+        component: () => import('@/layout/DefaultLayout.vue'),
         children: [
             {
                 name: 'home',
                 path: 'home',
-                component: import('@/view/HomeView.vue'),
+                component: () => import('@/views/HomeView.vue'),
             },
             {
                 name: 'about',
-                path: '/about',
-                component: import('@/components/About.vue'),
+                path: 'about',
+                component: () => import('@/components/About.vue'),
+            },
+            {
+                name: 'extry',
+                path: 'extry',
+                component: () => import('@/components/HelloWorld.vue'),
             },
         ],
     },
     {
+        name: 'upload',
+        path: '/upload',
+        component: () => import('@/views/UploadView.vue'),
+    },
+    {
+        name: 'updata',
+        path: '/updata',
+        component: () => import('@/views/UpdataView.vue'),
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: import('@/view/NotFoundView.vue'),
+        component: () => import('@/views/NotFoundView.vue'),
     },
 ];
 
