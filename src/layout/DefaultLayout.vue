@@ -1,6 +1,6 @@
 <template>
     <n-layout class="h-screen" content-class="flex flex-col">
-        <n-layout-header bordered class="h-1/15 shrink-0 p-6">
+        <n-layout-header bordered class="h-1/15 shrink-0">
             <header-area></header-area>
         </n-layout-header>
         <n-layout has-sider class="flex-1">
