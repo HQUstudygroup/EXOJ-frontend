@@ -33,5 +33,6 @@ declare module 'vue' {
     NSplit: typeof import('naive-ui')['NSplit']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UniTable: typeof import('./src/components/UniTable/UniTable.vue')['default']
   }
 }

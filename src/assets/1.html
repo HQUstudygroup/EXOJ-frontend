@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    </head>
+    <body>
+        <script>
+            function md5(str) {
+                return CryptoJS.MD5(str).toString();
+            }
+
+            let expiredDate = new Date();
+            expiredDate.setFullYear(expiredDate.getFullYear() + 99);
+
+            const milliSeconds = expiredDate.getTime();
+            const expired = btoa(milliSeconds.toString());
+
+            const license = `[v3][RELEASE][0102]_${'MTc3NTU1MDg5NDgwOQ=='}`;
+
+            const hash = md5(license);
+
+            const licenseKey = `${license}${hash}`;
+
+            console.log(licenseKey);
+        </script>
+    </body>
+</html>
