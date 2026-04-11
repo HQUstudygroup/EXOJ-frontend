@@ -14,93 +14,90 @@
         </n-tag>
     </div>
 
-    <!-- 操作栏 -->
-    <div class="action-bar bar-between">
-        <!-- 筛选按钮  -->
-        <n-button
-            style="
-                border-radius: 20px;
-                padding: 0 16px;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            "
-            @click="openFilter"
-        >
-            <n-icon>
-                <FilterOutline />
-            </n-icon>
-            筛选
-        </n-button>
+    <!-- 分成左右两半的操作栏 -->
+    <div class="action-bar double-bar">
+        <!-- 左半部分：筛选和查看数据 -->
+        <div class="bar-left">
+            <n-button
+                style="
+                    border-radius: 20px;
+                    padding: 0 16px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                "
+                @click="openFilterModal"
+            >
+                <n-icon>
+                    <FilterOutline />
+                </n-icon>
+                筛选
+            </n-button>
+            <n-button style="border-radius: 20px; padding: 0 16px" @click="goToDataView">
+                查看数据
+            </n-button>
+        </div>
 
-        <n-button style="border-radius: 20px; padding: 0 16px" @click="goToDataView">
-            查看数据
-        </n-button>
-
-        <n-button
-            type="primary"
-            style="margin-left: 16px; border-radius: 20px; padding: 0 20px"
-            @click="startProcess"
-        >
-            开始处理
-        </n-button>
+        <!-- 右半部分：开始处理 -->
+        <div class="bar-right">
+            <n-button
+                type="primary"
+                style="border-radius: 20px; padding: 0 20px"
+                @click="startProcess"
+            >
+                开始处理
+            </n-button>
+        </div>
     </div>
+
     <!-- 穿梭框 -->
-    <n-transfer v-model:value="value" :options="showOptions" style="height: calc(90vh - 220px)" />
+    <n-transfer v-model:value="value" :options="showOptions" />
 
     <!-- 筛选弹窗 -->
     <n-modal
         v-model:show="showFilterModal"
         preset="card"
         title="筛选条件"
-        style="width: 480px"
+        style="width: 520px"
         :closable="false"
     >
         <!-- 标题栏帮助图标 -->
         <template #header-extra>
             <n-space>
-                <n-icon style="cursor: pointer; color: #1890ff">
+                <n-icon style="cursor: pointer; color: #999; font-size: 20px">
                     <HelpCircleOutline />
                 </n-icon>
-                <n-icon style="cursor: pointer; color: #1890ff">
+                <n-icon style="cursor: pointer; color: #1890ff; font-size: 20px">
                     <BulbOutline />
                 </n-icon>
             </n-space>
         </template>
 
-        <!-- 逻辑选择：并且/或者 -->
-        <div style="margin-bottom: 16px">
-            <n-select
-                v-model:value="filterLogic"
-                :options="logicOptions"
-                style="width: 80px"
-                size="small"
-            />
-        </div>
-
         <!-- 筛选条件行 -->
         <div v-for="(row, index) in filterRows" :key="index" class="filter-row">
-            <!-- 第1个下拉：字段 -->
+            <!-- 字段选择 -->
             <n-select
                 v-model:value="row.field"
+                :options="fieldOptions"
                 placeholder="请选择"
-                style="width: 120px"
-                size="small"
+                style="width: 140px"
+                size="large"
             />
-            <!-- 第2个下拉：条件 -->
+            <!-- 条件选择 -->
             <n-select
                 v-model:value="row.condition"
+                :options="conditionOptions"
                 placeholder="请选择"
-                style="width: 100px"
-                size="small"
+                style="width: 120px"
+                size="large"
             />
-            <!-- 第3个下拉：值 -->
+            <!-- 值选择 -->
             <n-select
                 v-model:value="row.value"
                 :options="getValueOptions(row.field)"
                 placeholder="请选择"
-                style="width: 100px"
-                size="small"
+                style="width: 140px"
+                size="large"
             />
             <!-- + / - 按钮 -->
             <n-space>
@@ -124,25 +121,28 @@
         </div>
 
         <!-- 提示文字 -->
-        <div style="color: #ff4d4f; font-size: 12px; margin: 8px 0">最多四个筛选条件</div>
+        <div style="color: #ff4d4f; font-size: 14px; margin: 12px 0 20px 0">最多四个筛选条件</div>
 
         <!-- 底部按钮 -->
-        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px">
-            <n-button @click="cancelFilter">放弃筛选</n-button>
-            <n-button type="primary" @click="confirmFilter">确定筛选</n-button>
+        <div style="display: flex; justify-content: flex-end; gap: 16px">
+            <n-button size="large" @click="cancelFilter">放弃筛选</n-button>
+            <n-button type="primary" size="large" @click="confirmFilter">确定筛选</n-button>
         </div>
     </n-modal>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
 import { FilterOutline, HelpCircleOutline, BulbOutline } from '@vicons/ionicons5';
+import { useRouter } from 'vue-router';
 
-const router = useRouter();
-
+// 1. 基础数据定义
 // 原始字段列表
-const originalFields = ref([{ label: '序号', value: 'id', type: 'number' }]);
+const fieldOptions = ref([
+    { label: '序号', value: 'id', type: 'number' },
+    { label: '名称', value: 'name', type: 'string' },
+    { label: '状态', value: 'status', type: 'select', options: ['启用', '禁用'] },
+]);
 
 // 条件选项
 const conditionOptions = ref([
@@ -156,7 +156,7 @@ const conditionOptions = ref([
     { label: '不包含', value: 'notContains' },
 ]);
 
-// 逻辑选项：并且/或者
+// 逻辑选项
 const logicOptions = ref([
     { label: '并且', value: 'and' },
     { label: '或者', value: 'or' },
@@ -174,11 +174,9 @@ const originalOptions = ref(
     }))
 );
 
-// 筛选弹窗显示状态
+// 2. 筛选相关状态
 const showFilterModal = ref(false);
-// 筛选逻辑：并且/或者
 const filterLogic = ref('and');
-// 筛选条件行（最多4行）
 const filterRows = ref([{ field: '', condition: '', value: '' }]);
 
 // 3. 计算属性：筛选后的数据
@@ -188,42 +186,36 @@ const showOptions = computed(() => {
 
     if (validRows.length === 0) return result;
 
-    // 根据逻辑（并且/或者）筛选
+    // 根据逻辑筛选
     if (filterLogic.value === 'and') {
-        // 并且：所有条件都满足
         result = result.filter((item) => {
-            return validRows.every((row) => {
-                return matchCondition(item, row);
-            });
+            return validRows.every((row) => matchCondition(item, row));
         });
     } else {
-        // 或者：满足任意一个条件
         result = result.filter((item) => {
-            return validRows.some((row) => {
-                return matchCondition(item, row);
-            });
+            return validRows.some((row) => matchCondition(item, row));
         });
     }
 
     return result;
 });
 
-// 根据字段获取对应的值选项
+// 4. 工具方法
+// 根据字段获取值选项
 const getValueOptions = (field: string) => {
-    const fieldConfig = originalFields.value.find((f) => f.value === field);
+    const fieldConfig = fieldOptions.value.find((f) => f.value === field);
     if (!fieldConfig) return [];
     if (fieldConfig.type === 'select') {
         return fieldConfig.options.map((opt) => ({ label: opt, value: opt }));
     }
-    // 其他类型返回对应字段的所有唯一值
     return [...new Set(originalOptions.value.map((item) => item[field as keyof typeof item]))].map(
         (val) => ({ label: String(val), value: val })
     );
 };
 
-// 匹配单个筛选条件
+// 匹配单个条件
 const matchCondition = (item: any, row: any) => {
-    const fieldConfig = originalFields.value.find((f) => f.value === row.field);
+    const fieldConfig = fieldOptions.value.find((f) => f.value === row.field);
     if (!fieldConfig) return true;
 
     const itemValue = item[row.field];
@@ -265,7 +257,7 @@ const removeFilterRow = (index: number) => {
 };
 
 // 打开筛选弹窗
-const openFilter = () => {
+const openFilterModal = () => {
     showFilterModal.value = true;
 };
 
@@ -282,6 +274,11 @@ const confirmFilter = () => {
     showFilterModal.value = false;
 };
 
+// 已处理文件预览
+const options = originalOptions;
+const value = ref([]);
+const router = useRouter();
+
 const processedFiles = ref([{ id: 1, name: '学生信息汇总', path: '/preview/1' }]);
 
 const removeProcessedFile = (index: number) => {
@@ -296,7 +293,6 @@ const goToDataView = () => {
     router.push('/data-view');
 };
 
-// 已处理文件框
 const startProcess = () => {
     const newFile = {
         id: Date.now(),
@@ -306,32 +302,51 @@ const startProcess = () => {
     processedFiles.value.push(newFile);
     goToFilePreview(newFile);
 };
-
-// 导出给模板的选项
-const fieldOptions = computed(() =>
-    originalFields.value.map((f) => ({ label: f.label, value: f.value }))
-);
 </script>
 
 <style scoped>
-/* 标签栏样式 */
+/* 已处理文件标签栏样式 */
 .processed-file-bar {
     display: flex;
     align-items: center;
     padding: 8px 16px;
     background: #ffffff;
     border-bottom: 1px solid #e5e7eb;
-    margin: 0;
+    margin-bottom: 8px;
 }
 
-/* 操作栏样式 */
+/* 分成左右两半的操作栏 */
 .action-bar {
     display: flex;
     align-items: center;
-    padding: 10px 16px;
+    padding: 0;
     background: #ffffff;
     border-bottom: 1px solid #e5e7eb;
-    margin: 0 0 4px 0;
+    margin-bottom: 16px;
+}
+
+/* 左右两栏平分宽度 */
+.double-bar {
+    display: flex;
+    width: 100%;
+}
+
+/* 左栏 */
+.bar-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 16px;
+    border-right: 1px solid #e5e7eb;
+    gap: 12px;
+}
+
+/* 右栏 */
+.bar-right {
+    flex: 1;
+    display: flex;
+    justify-content: left;
+    padding: 10px 16px;
 }
 
 /* 按钮样式统一 */
@@ -340,24 +355,17 @@ const fieldOptions = computed(() =>
     font-weight: 500;
 }
 
-/* 操作栏布局 */
-.bar-between {
-    display: flex;
-    justify-content: flex-start;
-    gap: 12px;
-}
-
 /* 筛选行样式 */
 .filter-row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 /* 弹窗标题样式 */
 :deep(.n-card-header__main) {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
 }
 </style>

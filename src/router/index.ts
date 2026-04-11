@@ -37,6 +37,7 @@ const routes = [
         path: '/updata',
         component: () => import('@/views/UpdataView.vue'),
     },
+
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
