@@ -7,15 +7,15 @@
             <n-layout-sider
                 bordered
                 :native-scrollbar="false"
+                :collapsed-width="0"
                 collapse-mode="width"
                 show-trigger="arrow-circle"
-                collapsed-width="0"
                 collapsed-trigger-style="top: 250px; right: -25px"
                 trigger-style="top: 250px"
             >
                 <aside-area></aside-area>
             </n-layout-sider>
-            <n-layout-content bordered content-class="p-18" :native-scrollbar="false">
+            <n-layout-content bordered content-class="p-18 h-full" :native-scrollbar="false">
                 <router-view />
             </n-layout-content>
         </n-layout>

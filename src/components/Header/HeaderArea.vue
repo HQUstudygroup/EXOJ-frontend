@@ -18,7 +18,6 @@
             <n-button strong round :focusable="false" type="info"> 上传数据 </n-button>
 
             <n-button
-                quaternary
                 circle
                 text
                 :focusable="false"

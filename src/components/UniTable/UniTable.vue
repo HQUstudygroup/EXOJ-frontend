@@ -3,7 +3,7 @@
     <div
         :class="[
             'shadow-[0_4px_16px_rgba(0,0,0,0.5)]',
-            tableContainerClass ? tableContainerClass : 'h-200 w-350',
+            contentClass ? contentClass : 'h-200 w-350',
         ]"
         ref="container"
     />
@@ -31,7 +31,7 @@ import { useUniverStore } from '@/stores/univer';
 
 defineProps<{
     // 这里可以定义组件的 props 类型
-    tableContainerClass?: string;
+    contentClass?: string;
 }>();
 
 const univerStore = useUniverStore();
