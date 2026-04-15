@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@handsontable/vue3':
-        specifier: 12.0.0
-        version: 12.0.0(handsontable@12.0.0)(vue@3.5.31(typescript@5.9.3))
       '@univerjs/preset-sheets-core':
         specifier: ^0.20.0
         version: 0.20.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(rxjs@7.8.2)
@@ -29,21 +26,9 @@ importers:
       '@vicons/ionicons5':
         specifier: ^0.13.0
         version: 0.13.0
-      ag-grid-community:
-        specifier: ^35.2.1
-        version: 35.2.1
-      ag-grid-enterprise:
-        specifier: ^35.2.1
-        version: 35.2.1
-      ag-grid-vue3:
-        specifier: ^35.2.1
-        version: 35.2.1(vue@3.5.31(typescript@5.9.3))
       axios:
         specifier: ^1.14.0
         version: 1.14.0
-      handsontable:
-        specifier: 12.0.0
-        version: 12.0.0
       naive-ui:
         specifier: ^2.44.1
         version: 2.44.1(vue@3.5.31(typescript@5.9.3))
@@ -198,12 +183,6 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
-
-  '@handsontable/vue3@12.0.0':
-    resolution: {integrity: sha512-3CjgcqruN1KMW7CRdey6yz07T6ihwF5cSfsGZI8j0lQBrpJCFuuCUhSCN0vy5XKrPdOqgWA6e5kq2/vy8WmzkA==}
-    peerDependencies:
-      handsontable: '>=12.0.0'
-      vue: next
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -859,9 +838,6 @@ packages:
 
   '@types/node@24.12.0':
     resolution: {integrity: sha512-GYDxsZi3ChgmckRT9HPU0WEhKLP08ev/Yfcq2AstjrDASOYCSXeyjDsHg4v5t4jOj7cyDX3vmprafKlWIG9MXQ==}
-
-  '@types/pikaday@1.7.4':
-    resolution: {integrity: sha512-0KsHVyw5pTG829nqG4IRu7m+BFQlFEBdbE/1i3S5182HeKUKv1uEW0gyEmkJVp5i4IV+9pyh23O83+KpRkSQbw==}
 
   '@univerjs-pro/collaboration-client-ui@0.20.0':
     resolution: {integrity: sha512-7FFM/9VdeFHioxSJ6r+t67kurzLA1w57O/J71ZC9goHxCf/rC61p/iwNKCSwlnrc73DCey39TFcZ2QdC/I9g2g==}
@@ -1559,32 +1535,6 @@ packages:
     resolution: {integrity: sha512-ynZ4w/nUUv5rrsR8UUGoe1VC9hZj6V5hU9Qw1HlMDJGEJw5S7TfTErWTjMys6M7vr0YWcPqs3qAr4ss0nDfP+A==}
     engines: {node: '>=0.8'}
 
-  ag-charts-community@13.2.1:
-    resolution: {integrity: sha512-A+DCiesRp6WQ5R5e3x9bLh50IWCachVF6gkz6Dz4icMcq6WL5JNKL+xZEzrKYl+kuD8Y8728xmVm/H53o9Nayw==}
-
-  ag-charts-core@13.2.1:
-    resolution: {integrity: sha512-Y7rk3kF+fA6bUMjU+vIzG5rRBd+8EKjyIjzNR2uV1+HyrlnOn6b7Eb9HPkDUoosWHhz+UNCOW/lYDzPP6mivHQ==}
-
-  ag-charts-enterprise@13.2.1:
-    resolution: {integrity: sha512-QiNuNUu3o5qWUz9cPLuKr9r9k2YsO8Nwp4qJGR0s76WT6AeCmqKa12cSJrvIpwvPdjZ3PVlwsMA8s8EZ4dqrXA==}
-
-  ag-charts-locale@13.2.1:
-    resolution: {integrity: sha512-lwwV/l/O187R4DYUfjm6p8LijITe46IlDz8nOxNQNJAOpkzs+cWmjSxfNiM1BMVCWTcMdah/AKN+6iihbDa8IA==}
-
-  ag-charts-types@13.2.1:
-    resolution: {integrity: sha512-r7veb3QqJtIKlXmeUsLR4/oDPwmHxFI2tmbZra/203mdaz3uwQUrrgYNg628nrK+7L2YxXnwGc6L05tWjLLjNQ==}
-
-  ag-grid-community@35.2.1:
-    resolution: {integrity: sha512-ycmGI+1EbUT7i3eg/Kgi1owwnkdHXRufo10Xm6cfSsVPM3TMpvlbLgi28KIPt9DGHZWHq9fOBn7nxMNdv1Yaow==}
-
-  ag-grid-enterprise@35.2.1:
-    resolution: {integrity: sha512-nLl06cc7/THzf7mGZt7PotdeaBN74X3K9g2looyvJEymrOOJfjrLePrV4aNNhz/WZnATkbyblm5DM/qv3BeHKA==}
-
-  ag-grid-vue3@35.2.1:
-    resolution: {integrity: sha512-6QYw9QF9UKKiq+FKSehU33ABEtrNuKkqdrLO0SXtRD03u0ETlq/VYavfcB64hj9hvdjJJ9/PD0+vd0MyQWCtyA==}
-    peerDependencies:
-      vue: ^3.5.0
-
   ajv@6.14.0:
     resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
@@ -1611,9 +1561,6 @@ packages:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
     engines: {node: 18 || 20 || >=22}
 
-  bignumber.js@8.1.1:
-    resolution: {integrity: sha512-QD46ppGintwPGuL1KqmwhR0O+N2cZUg8JG/VzwI2e28sM9TqHjQB10lI4QAaMHVbLzwVLLAwEglpKPViWX+5NQ==}
-
   birpc@2.9.0:
     resolution: {integrity: sha512-KrayHS5pBi69Xi9JmvoqrIgYGDkD6mcSe/i6YKi3w5kekCLzrX4+nawcXqrj2tIp50Kw/mT/s3p+GVK0A0sKxw==}
 
@@ -1632,9 +1579,6 @@ packages:
   cfb@1.2.2:
     resolution: {integrity: sha512-KfdUZsSOw19/ObEWasvBP/Ac4reZvAGauZhs6S/gqNhXhI7cKwvlH7ulj+dOEYnca4bm4SGo8C1bTAQvnTjgQA==}
     engines: {node: '>=0.8'}
-
-  chevrotain@6.5.0:
-    resolution: {integrity: sha512-BwqQ/AgmKJ8jcMEjaSnfMybnKMgGTrtDKowfTP3pX4jwVy0kNjRsT/AP6h+wC3+3NC+X8X15VWBnTCQlX+wQFg==}
 
   chokidar@5.0.0:
     resolution: {integrity: sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw==}
@@ -1678,9 +1622,6 @@ packages:
   copy-anything@4.0.5:
     resolution: {integrity: sha512-7Vv6asjS4gMOuILabD3l739tsaxFQmC+a7pLZm02zyvs8p977bL3zEgq3yDk5rn9B0PbYgIv++jmHcuUab4RhA==}
     engines: {node: '>=18'}
-
-  core-js@3.49.0:
-    resolution: {integrity: sha512-es1U2+YTtzpwkxVLwAFdSpaIMyQaq0PBgm3YD1W3Qpsn1NAmO3KSgZfu+oGSWVu6NvLHoHCV/aYcsE5wiB7ALg==}
 
   crc-32@1.2.2:
     resolution: {integrity: sha512-ROmzCKrTnOwybPcJApAA6WBWij23HVfGVNKqqrZpuyZOHqK2CwHSvpGuyt/UNNvaIjEd8X5IFGp4Mh+Ie1IHJQ==}
@@ -1752,9 +1693,6 @@ packages:
 
   dom-helpers@5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
-
-  dompurify@2.5.9:
-    resolution: {integrity: sha512-i6mvVmWN4xo9LrhCOZrDgSs9noW6nOahbrmzjRbPF36YPyj5Ue5lgok0MHDWkG7xzpWFO2OYttXdzM7rJxHvNA==}
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -1933,9 +1871,6 @@ packages:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
     engines: {node: '>=10'}
 
-  handsontable@12.0.0:
-    resolution: {integrity: sha512-3DLHhp2yTowG2d+KKsL/oodNVyHtgT5q0H+7LiZZKCsVeDNw6iifuOexU8D5Sh3aSPY1P9x3siTlCw4jo9obxg==}
-
   has-symbols@1.1.0:
     resolution: {integrity: sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==}
     engines: {node: '>= 0.4'}
@@ -1954,9 +1889,6 @@ packages:
 
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
-
-  hyperformula@2.7.1:
-    resolution: {integrity: sha512-mpVF5zOyNpksZzgTaCQyRAzdC/X43+taz5x1n7zNbs/PUUv0AuLmsy2yfihCr+vihUzN/pk+gXBbOfNpXKOpgA==}
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
@@ -2142,9 +2074,6 @@ packages:
   mlly@1.8.2:
     resolution: {integrity: sha512-d+ObxMQFmbt10sretNDytwt85VrbkhhUA/JBGm1MPaWJ65Cl4wOgLaB1NYvJSZ0Ef03MMEU/0xpPMXUIQ29UfA==}
 
-  moment@2.29.3:
-    resolution: {integrity: sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==}
-
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
     engines: {node: '>=10'}
@@ -2179,9 +2108,6 @@ packages:
 
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
-
-  numbro@2.1.2:
-    resolution: {integrity: sha512-7w833BxZmKGLE9HI0aREtNVRVH6WTYUUlWf4qgA5gKNhPQ4F/MRZ14sc0v8eoLORprk9ZTVwYaLwj8N3Zgxwiw==}
 
   numfmt@3.2.6:
     resolution: {integrity: sha512-MXc2KP3j+2usdHTY5/ENUc2S+3BRF/cJqnR6RHeq6LBqKoIZOAQ62DQw974nnaZOencbfkmkTPyTmMnlkCpjzg==}
@@ -2260,9 +2186,6 @@ packages:
   picomatch@4.0.4:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
-
-  pikaday@1.8.0:
-    resolution: {integrity: sha512-SgGxMYX0NHj9oQnMaSyAipr2gOrbB4Lfs/TJTb6H6hRHs39/5c5VZi73Q8hr53+vWjdn6HzkWcj8Vtl3c9ziaA==}
 
   pinia@3.0.4:
     resolution: {integrity: sha512-l7pqLUFTI/+ESXn6k3nu30ZIzW5E2WZF/LaHJEpoq6ElcLD+wduZoB2kBN19du6K/4FDpPMazY2wJr+IndBtQw==}
@@ -2367,9 +2290,6 @@ packages:
     resolution: {integrity: sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==}
     engines: {node: '>= 20.19.0'}
 
-  regexp-to-ast@0.4.0:
-    resolution: {integrity: sha512-4qf/7IsIKfSNHQXSwial1IFmfM1Cc/whNBQqRwe0V2stPe7KmN1U0tWQiIx6JiirgSrisjE0eECdNf7Tav1Ntw==}
-
   regexp-tree@0.1.27:
     resolution: {integrity: sha512-iETxpjK6YoRWJG5o6hXLwvjYAoW+FEZn9os0PD/b6AP6xQwsa/Y7lCVgIixBbUPMfhu+i2LtdeAqVTgGlQarfA==}
     hasBin: true
@@ -2440,9 +2360,6 @@ packages:
 
   tailwind-merge@2.6.0:
     resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
-
-  tiny-emitter@2.1.0:
-    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
@@ -2784,11 +2701,6 @@ snapshots:
       react-dom: 19.2.5(react@19.2.5)
 
   '@floating-ui/utils@0.2.11': {}
-
-  '@handsontable/vue3@12.0.0(handsontable@12.0.0)(vue@3.5.31(typescript@5.9.3))':
-    dependencies:
-      handsontable: 12.0.0
-      vue: 3.5.31(typescript@5.9.3)
 
   '@humanfs/core@0.19.1': {}
 
@@ -3241,10 +3153,6 @@ snapshots:
   '@types/node@24.12.0':
     dependencies:
       undici-types: 7.16.0
-
-  '@types/pikaday@1.7.4':
-    dependencies:
-      moment: 2.29.3
 
   '@univerjs-pro/collaboration-client-ui@0.20.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(rxjs@7.8.2)':
     dependencies:
@@ -4881,45 +4789,6 @@ snapshots:
 
   adler-32@1.3.1: {}
 
-  ag-charts-community@13.2.1:
-    dependencies:
-      ag-charts-core: 13.2.1
-      ag-charts-locale: 13.2.1
-      ag-charts-types: 13.2.1
-    optional: true
-
-  ag-charts-core@13.2.1:
-    dependencies:
-      ag-charts-types: 13.2.1
-    optional: true
-
-  ag-charts-enterprise@13.2.1:
-    dependencies:
-      ag-charts-community: 13.2.1
-      ag-charts-core: 13.2.1
-    optional: true
-
-  ag-charts-locale@13.2.1:
-    optional: true
-
-  ag-charts-types@13.2.1: {}
-
-  ag-grid-community@35.2.1:
-    dependencies:
-      ag-charts-types: 13.2.1
-
-  ag-grid-enterprise@35.2.1:
-    dependencies:
-      ag-grid-community: 35.2.1
-    optionalDependencies:
-      ag-charts-community: 13.2.1
-      ag-charts-enterprise: 13.2.1
-
-  ag-grid-vue3@35.2.1(vue@3.5.31(typescript@5.9.3)):
-    dependencies:
-      ag-grid-community: 35.2.1
-      vue: 3.5.31(typescript@5.9.3)
-
   ajv@6.14.0:
     dependencies:
       fast-deep-equal: 3.1.3
@@ -4949,8 +4818,6 @@ snapshots:
 
   balanced-match@4.0.4: {}
 
-  bignumber.js@8.1.1: {}
-
   birpc@2.9.0: {}
 
   brace-expansion@5.0.5:
@@ -4968,11 +4835,6 @@ snapshots:
     dependencies:
       adler-32: 1.3.1
       crc-32: 1.2.2
-
-  chevrotain@6.5.0:
-    dependencies:
-      regexp-to-ast: 0.4.0
-    optional: true
 
   chokidar@5.0.0:
     dependencies:
@@ -5008,8 +4870,6 @@ snapshots:
   copy-anything@4.0.5:
     dependencies:
       is-what: 5.5.0
-
-  core-js@3.49.0: {}
 
   crc-32@1.2.2: {}
 
@@ -5065,8 +4925,6 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.29.2
       csstype: 3.2.3
-
-  dompurify@2.5.9: {}
 
   dunder-proto@1.0.1:
     dependencies:
@@ -5252,17 +5110,6 @@ snapshots:
     dependencies:
       duplexer: 0.1.2
 
-  handsontable@12.0.0:
-    dependencies:
-      '@types/pikaday': 1.7.4
-      core-js: 3.49.0
-      dompurify: 2.5.9
-      moment: 2.29.3
-      numbro: 2.1.2
-      pikaday: 1.8.0
-    optionalDependencies:
-      hyperformula: 2.7.1
-
   has-symbols@1.1.0: {}
 
   has-tostringtag@1.0.2:
@@ -5276,12 +5123,6 @@ snapshots:
   highlight.js@11.11.1: {}
 
   hookable@5.5.3: {}
-
-  hyperformula@2.7.1:
-    dependencies:
-      chevrotain: 6.5.0
-      tiny-emitter: 2.1.0
-    optional: true
 
   ignore@5.3.2: {}
 
@@ -5434,8 +5275,6 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.6.3
 
-  moment@2.29.3: {}
-
   mrmime@2.0.1: {}
 
   ms@2.1.3: {}
@@ -5473,10 +5312,6 @@ snapshots:
   natural-compare@1.4.0: {}
 
   node-fetch-native@1.6.7: {}
-
-  numbro@2.1.2:
-    dependencies:
-      bignumber.js: 8.1.1
 
   numfmt@3.2.6: {}
 
@@ -5573,8 +5408,6 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  pikaday@1.8.0: {}
-
   pinia@3.0.4(typescript@5.9.3)(vue@3.5.31(typescript@5.9.3)):
     dependencies:
       '@vue/devtools-api': 7.7.9
@@ -5665,9 +5498,6 @@ snapshots:
 
   readdirp@5.0.0: {}
 
-  regexp-to-ast@0.4.0:
-    optional: true
-
   regexp-tree@0.1.27: {}
 
   regexp-util@2.0.3: {}
@@ -5744,9 +5574,6 @@ snapshots:
       copy-anything: 4.0.5
 
   tailwind-merge@2.6.0: {}
-
-  tiny-emitter@2.1.0:
-    optional: true
 
   tiny-inflate@1.0.3: {}
 
