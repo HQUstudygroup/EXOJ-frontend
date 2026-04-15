@@ -15,7 +15,7 @@
             >
                 <aside-area></aside-area>
             </n-layout-sider>
-            <n-layout-content bordered content-class="p-18 h-full" :native-scrollbar="false">
+            <n-layout-content bordered content-class="p-10 px-18 h-full" :native-scrollbar="false">
                 <router-view />
             </n-layout-content>
         </n-layout>

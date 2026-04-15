@@ -1,35 +1,44 @@
 <template>
-    <div>
-        <FilterModal />
+    <div class="h-full flex flex-col gap-3">
+        <n-split
+            :resize-trigger-size="3"
+            direction="vertical"
+            pane1-class="h-full"
+            pane2-class="p-5 h-full box-border"
+            :default-size="0.35"
+            :max="0.6"
+            :min="0.3"
+        >
+            <template #1>
+                <n-split
+                    :resize-trigger-size="3"
+                    direction="horizontal"
+                    pane1-class="p-3 box-border h-full"
+                    :default-size="0.4"
+                    :max="0.6"
+                    :min="0.35"
+                >
+                    <template #1>
+                        <sheets-info-area></sheets-info-area>
+                    </template>
 
-        <n-transfer
-            v-model:value="value1"
-            :options="options1"
-            virtual-scroll
-            source-filterable
-            target-filterable
-            @update:value="handleChange"
-        />
+                    <template #2>
+                        <analize-panel></analize-panel>
+                    </template>
+                </n-split>
+            </template>
+
+            <template #2>
+                <uni-table :content-class="'w-full h-full'"></uni-table>
+            </template>
+        </n-split>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import FilterModal from '@/components/FilterModal/FilterModal.vue';
-
-function createOptions() {
-    return Array.from({ length: 20 }).map((v, i) => ({
-        label: `Option ${i}`,
-        value: `Option ${i}`,
-    }));
-}
-
-function handleChange(newValue: string[]) {
-    console.log('当前选中:', newValue);
-}
-
-const options1 = createOptions();
-const value1 = ref();
+import SheetsInfoArea from '@/components/SheetsInfoArea/SheetsInfoArea.vue';
+import AnalizePanel from '@/components/AnalizePanel/AnalizePanel.vue';
+import UniTable from '@/components/UniTable/UniTable.vue';
 </script>
 
 <style scoped></style>
