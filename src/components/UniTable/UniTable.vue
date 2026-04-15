@@ -1,5 +1,4 @@
 <template>
-    <input type="file" @change="handleFileChange" />
     <div
         :class="[
             'shadow-[0_4px_16px_rgba(0,0,0,0.5)]',
@@ -20,17 +19,17 @@ import UniverPresetSheetsSortZhCN from '@univerjs/preset-sheets-sort/locales/zh-
 import { UniverSheetsHyperLinkPreset } from '@univerjs/preset-sheets-hyper-link';
 import UniverPresetSheetsHyperLinkZhCN from '@univerjs/preset-sheets-hyper-link/locales/zh-CN';
 import { createUniver, LocaleType, mergeLocales } from '@univerjs/presets';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 import '@univerjs/preset-sheets-core/lib/index.css';
 import '@univerjs/preset-sheets-sort/lib/index.css';
 import '@univerjs/preset-sheets-filter/lib/index.css';
 import '@univerjs/preset-sheets-hyper-link/lib/index.css';
 
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+
 import { useUniverStore } from '@/stores/univer';
 
 defineProps<{
-    // 这里可以定义组件的 props 类型
     contentClass?: string;
 }>();
 
@@ -76,11 +75,4 @@ onBeforeUnmount(() => {
     univerInstance = null;
     univerAPIInstance = null;
 });
-
-const handleFileChange = async (e: Event) => {
-    const file = (e.target as HTMLInputElement).files?.[0];
-    if (!file || !univerAPIInstance) return;
-
-    await univerStore.importExcel(file);
-};
 </script>
