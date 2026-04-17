@@ -4,7 +4,7 @@ const routes = [
     {
         name: 'index',
         path: '/',
-        redirect: '/home',
+        redirect: '/welcome',
     },
     {
         path: '/',
@@ -41,6 +41,11 @@ const routes = [
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('@/views/NotFoundView.vue'),
+    },
+    {
+        path: '/welcome',
+        name: 'welcome',
+        component: () => import('@/views/Welcomeview.vue'),
     },
 ];
 

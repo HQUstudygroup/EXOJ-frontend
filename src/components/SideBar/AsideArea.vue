@@ -1,5 +1,10 @@
 <template>
-    <n-menu :options="asideOptions" :render-label="renderMenuLabel" :render-icon="renderMenuIcon" />
+    <n-menu
+        :options="asideOptions"
+        :render-label="renderMenuLabel"
+        :render-icon="renderMenuIcon"
+        @update:value="handleClick"
+    />
 </template>
 
 <script setup lang="ts">
@@ -23,6 +28,67 @@ function renderMenuIcon(option: MenuOption) {
     if (option.key === 'food') return null;
     return h(NIcon, null, { default: () => h(BookmarkOutline) });
 }
+
+const emit = defineEmits(['show-function']);
+
+const handleClick = (key) => {
+    const functionKeys = new Set([
+        'sum',
+        'average',
+        'max',
+        'min',
+        'count',
+        'counta',
+        'countblank',
+        'round',
+        'roundup',
+        'rounddown',
+        'abs',
+        'mod',
+        'if',
+        'ifs',
+        'and',
+        'or',
+        'not',
+        'iferror',
+        'vlookup',
+        'hlookup',
+        'index',
+        'match',
+        'xlookup',
+        'choose',
+        'inderect',
+        'offset',
+        'left',
+        'right',
+        'mid',
+        'len',
+        'trim',
+        'upper',
+        'lower',
+        'proper',
+        'concat',
+        'text',
+        'today',
+        'now',
+        'year',
+        'month',
+        'day',
+        'hour',
+        'minute',
+        'datedif',
+        'sumif',
+        'sumifs',
+        'countif',
+        'countifs',
+        'averageif',
+        'averageifs',
+    ]);
+
+    if (functionKeys.has(key)) {
+        emit('show-function', key);
+    }
+};
 </script>
 
 <style scoped></style>
