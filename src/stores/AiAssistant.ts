@@ -1,3 +1,5 @@
+import { chatAPI } from '@/api/chat';
+
 import { defineStore } from 'pinia';
 import { nextTick } from 'vue';
 
@@ -21,13 +23,15 @@ import { nextTick } from 'vue';
  * @property {Function} actions.scrollToButtom - 渲染消息的时候滚动条到最底下
  */
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
+
 export const useAiAssistantStore = defineStore('askassistant', {
     state: () => ({
-        /** @type {{role: string, content: string, isPending: boolean}[]} 消息列表，用于 UI 渲染 */
+        /** @type {{role: string, content: string, messageStatus: boolean | 'error'}[]} 消息列表，用于 UI 渲染 */
         messages: [] as {
             role: string;
             content: string;
-            isPending: boolean;
+            messageStatus: boolean | 'error';
         }[],
 
         /** @type {number} 任务轮次 ID，用于通过版本比对防止异步请求污染 */
@@ -48,13 +52,13 @@ export const useAiAssistantStore = defineStore('askassistant', {
          * 向消息列表追加一条新消息
          * @param {string} role - 角色: 'user' | 'assistant'
          * @param {string} content - 消息文本内容
-         * @param {boolean} isPending - 是否处于加载/打字机状态
+         * @param {boolean} messageStatus - 是否处于加载/打字机状态
          */
-        addMessage(role: string, content: string, isPending: boolean) {
+        addMessage(role: string, content: string, messageStatus: boolean) {
             this.messages.push({
                 role,
                 content,
-                isPending,
+                messageStatus,
             });
         },
 
@@ -72,8 +76,8 @@ export const useAiAssistantStore = defineStore('askassistant', {
             }
 
             const last = this.messages.at(-1);
-            if (last && last.role === 'assistant' && last.isPending) {
-                last.isPending = false;
+            if (last && last.role === 'assistant' && last.messageStatus) {
+                last.messageStatus = false;
             }
         },
 
@@ -105,20 +109,17 @@ export const useAiAssistantStore = defineStore('askassistant', {
             try {
                 if (id !== this.taskId) return;
 
-                const response = await fetch('http://127.0.0.1:8000/aichat/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        session_id,
-                        prompt,
-                    }),
+                const response = await chatAPI({
+                    baseURL,
+                    session_id,
+                    prompt,
                     signal: this.abortController.signal,
                 });
 
-                if (!response.body) throw new Error('No body');
-
-                const reader = response.body.getReader();
+                const reader = response.body?.getReader();
                 const decoder = new TextDecoder();
+
+                if (!reader) throw new Error('无法读取流：response.body 为 null');
 
                 while (true) {
                     if (!this.isInputLoading || id !== this.taskId) break;
@@ -131,15 +132,18 @@ export const useAiAssistantStore = defineStore('askassistant', {
                     await this.analyzePack(id, assistantIndex, chunk);
                 }
             } catch (error: any) {
-                if (error.name !== 'AbortError') {
-                    if (this.messages[assistantIndex]) {
-                        this.messages[assistantIndex].content +=
-                            `<p style='color: red;'>出错了</p>`;
-                    }
-                    console.error('流传输失败:', error);
-                }
+                if (error.name === 'AbortError') return;
+
+                this.messages[assistantIndex].messageStatus = 'error';
+                this.messages[assistantIndex].content += error;
+
+                console.error('流传输失败:', error);
             } finally {
-                if (this.messages[assistantIndex]) this.messages[assistantIndex].isPending = false;
+                if (
+                    this.messages[assistantIndex] &&
+                    this.messages[assistantIndex].messageStatus !== 'error'
+                )
+                    this.messages[assistantIndex].messageStatus = false;
 
                 this.isInputLoading = false;
                 this.abortController = null;
@@ -168,8 +172,8 @@ export const useAiAssistantStore = defineStore('askassistant', {
 
                 if (rawData === '[DONE]') {
                     if (this.messages[assistantIndex]?.content === '') {
-                        this.messages[assistantIndex].content +=
-                            `<p style='color: red;'>没额度了</p>`;
+                        this.messages[assistantIndex].messageStatus = 'error';
+                        this.messages[assistantIndex].content += `没额度了`;
                     }
                     break;
                 }

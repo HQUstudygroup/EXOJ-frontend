@@ -13,11 +13,11 @@
         :name="msg.role === 'user' ? 'User' : 'Asssistant'"
         :role="msg.role"
         :placement="msg.role === 'user' ? 'right' : 'left'"
-        :status="msg.isPending ? 'pending' : ''"
-        :variant="msg.role === 'user' ? 'base' : 'outline'"
+        :status="msg.messageStatus !== 'error' ? (msg.messageStatus ? 'pending' : '') : 'error'"
+        :variant="msg.role === 'user' ? 'base' : msg.content !== '' ? 'outline' : 'text'"
         :content="[
             {
-                type: msg.role === 'user' ? 'text' : 'markdown',
+                type: msg.role === 'user' || msg.messageStatus === 'error' ? 'text' : 'markdown',
                 data: msg.content,
             },
         ]"
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAiAssistantStore } from '@/stores/AiAssistant';
+import { useAiAssistantStore } from '@/stores/aiAssistant';
 
 const AiAssistantStore = useAiAssistantStore();
 

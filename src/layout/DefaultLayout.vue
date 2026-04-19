@@ -28,9 +28,9 @@
 
 <script setup lang="ts">
 import AssistantModal from '@/components/AssistantChat/AssistantModal.vue';
+import FunctionModal from '@/components/SideBar/FunctionModal.vue';
 import HeaderArea from '@/components/Header/HeaderArea.vue';
 import AsideArea from '@/components/SideBar/AsideArea.vue';
-import FunctionModal from '@/components/SideBar/FunctionModal.vue';
 </script>
 
 <style sc></style>

@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import MessageInputBox from '@/components/AssistantChat/MessageInputBox.vue';
-import { useAiAssistantStore } from '@/stores/AiAssistant';
+import { useAiAssistantStore } from '@/stores/aiAssistant';
 import MessageArea from './MessageArea.vue';
 
 const aiAssistantStore = useAiAssistantStore();
