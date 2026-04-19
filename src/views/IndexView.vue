@@ -1,6 +1,4 @@
 <template>
-    <about></about>
-
     <div class="h-full flex flex-col gap-3">
         <n-split
             :resize-trigger-size="3"
@@ -44,6 +42,7 @@ import UniTable from '@/components/UniTable/UniTable.vue';
 import { useUniverStore } from '@/stores/univer';
 
 const univerStore = useUniverStore();
+
 (window as any).univerStore = univerStore;
 </script>
 

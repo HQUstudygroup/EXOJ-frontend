@@ -38,6 +38,9 @@ export const useAiAssistantStore = defineStore('askassistant', {
 
         /** @type {AbortController | null} 控制当前 Fetch 请求的中断控制器 */
         abortController: null as AbortController | null,
+
+        /** @type {boolean} 控制 AI 助手模态框显示 */
+        showAssistantModal: false as boolean,
     }),
 
     actions: {

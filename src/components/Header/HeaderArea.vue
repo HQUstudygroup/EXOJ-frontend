@@ -27,6 +27,7 @@
                 :focusable="false"
                 size="large"
                 class="ml-3 c-gray-500 !hover:c-amber-300"
+                @click="aiAssistantStore.showAssistantModal = !aiAssistantStore.showAssistantModal"
             >
                 <template #icon>
                     <n-icon>
@@ -41,8 +42,10 @@
 <script setup lang="ts">
 import { Sparkles } from '@vicons/ionicons5';
 import { useUniverStore } from '@/stores/univer';
+import { useAiAssistantStore } from '@/stores/AiAssistant';
 
 const univerStore = useUniverStore();
+const aiAssistantStore = useAiAssistantStore();
 
 const handleFileChange = async (options: any) => {
     const file = options.file?.file || options.file;

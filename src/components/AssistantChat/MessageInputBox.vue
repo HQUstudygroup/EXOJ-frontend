@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useAiAssistantStore } from '@/store/AiAssistant';
+import { useAiAssistantStore } from '@/stores/AiAssistant';
 
 const value = ref('openclaw/default');
 const prompt = ref('');

@@ -22,12 +22,15 @@
     </n-layout>
 
     <!-- 弹窗组件 -->
-    <FunctionModal ref="modalRef" />
+    <FunctionModal></FunctionModal>
+    <AssistantModal></AssistantModal>
 </template>
 
 <script setup lang="ts">
+import AssistantModal from '@/components/AssistantChat/AssistantModal.vue';
 import HeaderArea from '@/components/Header/HeaderArea.vue';
 import AsideArea from '@/components/SideBar/AsideArea.vue';
+import FunctionModal from '@/components/SideBar/FunctionModal.vue';
 </script>
 
 <style sc></style>

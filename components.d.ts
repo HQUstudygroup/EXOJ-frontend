@@ -87,4 +87,5 @@ declare module 'vue' {
     TChatSender: typeof import('@tdesign-vue-next/chat')['ChatSender']
     TSpace: typeof import('tdesign-vue')['Space']
     UniTable: typeof import('./src/components/UniTable/UniTable.vue')['default']
+  }
 }
