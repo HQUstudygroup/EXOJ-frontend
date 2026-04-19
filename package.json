@@ -11,16 +11,17 @@
         "format:fix": "prettier --write ."
     },
     "dependencies": {
-        "@handsontable/vue3": "^17.0.1",
+        "@tdesign-vue-next/chat": "^0.5.2",
         "@vicons/ionicons5": "^0.13.0",
         "axios": "^1.14.0",
-        "handsontable": "^17.0.1",
+        "katex": "^0.16.45",
         "naive-ui": "^2.44.1",
         "pinia": "^3.0.4",
         "vue": "^3.5.30",
         "vue-router": "^4.6.4"
     },
     "devDependencies": {
+        "@tdesign-vue-next/auto-import-resolver": "^0.1.6",
         "@types/node": "^24.12.0",
         "@unocss/preset-attributify": "^66.6.7",
         "@unocss/preset-icons": "^66.6.7",
