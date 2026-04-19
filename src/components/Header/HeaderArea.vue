@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { Sparkles } from '@vicons/ionicons5';
 import { useUniverStore } from '@/stores/univer';
-import { useAiAssistantStore } from '@/stores/AiAssistant';
+import { useAiAssistantStore } from '@/stores/aiAssistant';
 
 const univerStore = useUniverStore();
 const aiAssistantStore = useAiAssistantStore();
