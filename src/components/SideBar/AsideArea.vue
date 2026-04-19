@@ -1,94 +1,16 @@
 <template>
     <n-menu
+        v-model:value="menuStore.activeKey"
         :options="asideOptions"
-        :render-label="renderMenuLabel"
-        :render-icon="renderMenuIcon"
-        @update:value="handleClick"
+        @update:value="menuStore.openFormulaInfoModal"
     />
 </template>
 
 <script setup lang="ts">
-import type { MenuOption } from 'naive-ui';
 import { asideOptions } from './asideOptions';
-import { BookmarkOutline } from '@vicons/ionicons5';
-import { NIcon } from 'naive-ui';
-import { h } from 'vue';
+import { useMenuStore } from '@/stores/menu';
 
-function renderMenuLabel(option: MenuOption) {
-    if ('href' in option) {
-        return h('a', { href: option.href }, option.label as string);
-    }
-    return option.label as string;
-}
-
-function renderMenuIcon(option: MenuOption) {
-    // 渲染图标占位符以保持缩进
-    if (option.key === 'sheep-man') return true;
-    // 返回 falsy 值，不再渲染图标及占位符
-    if (option.key === 'food') return null;
-    return h(NIcon, null, { default: () => h(BookmarkOutline) });
-}
-
-const emit = defineEmits(['show-function']);
-
-const handleClick = (key) => {
-    const functionKeys = new Set([
-        'sum',
-        'average',
-        'max',
-        'min',
-        'count',
-        'counta',
-        'countblank',
-        'round',
-        'roundup',
-        'rounddown',
-        'abs',
-        'mod',
-        'if',
-        'ifs',
-        'and',
-        'or',
-        'not',
-        'iferror',
-        'vlookup',
-        'hlookup',
-        'index',
-        'match',
-        'xlookup',
-        'choose',
-        'inderect',
-        'offset',
-        'left',
-        'right',
-        'mid',
-        'len',
-        'trim',
-        'upper',
-        'lower',
-        'proper',
-        'concat',
-        'text',
-        'today',
-        'now',
-        'year',
-        'month',
-        'day',
-        'hour',
-        'minute',
-        'datedif',
-        'sumif',
-        'sumifs',
-        'countif',
-        'countifs',
-        'averageif',
-        'averageifs',
-    ]);
-
-    if (functionKeys.has(key)) {
-        emit('show-function', key);
-    }
-};
+const menuStore = useMenuStore();
 </script>
 
 <style scoped></style>

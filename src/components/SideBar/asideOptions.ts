@@ -11,19 +11,15 @@ export const asideOptions: MenuOption[] = [
                 children: [
                     {
                         label: 'SUM',
-                        key: 'sum',
+                        key: 'SUM',
                     },
                     {
                         label: 'AVERAGE',
-                        key: 'average',
-                    },
-                    {
-                        label: 'MAX',
-                        key: 'max',
+                        key: 'AVERAGE',
                     },
                     {
                         label: 'MIN',
-                        key: 'min',
+                        key: 'MIN',
                     },
                     {
                         label: 'COUNT',
