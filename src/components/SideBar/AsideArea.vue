@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { asideOptions } from './asideOptions';
+import asideOptions from './asideOptions';
 import { useMenuStore } from '@/stores/menu';
 
 const menuStore = useMenuStore();
