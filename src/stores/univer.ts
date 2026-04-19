@@ -1,14 +1,17 @@
-import { defineStore } from 'pinia';
 import { type FUniver } from '@univerjs/presets';
 import { type FWorkbook } from '@univerjs/preset-sheets-core';
+
 import readXlsx from '@/utils/xlsxUtil';
 import debounce from '@/utils/debounce';
+
+import { defineStore } from 'pinia';
 import { markRaw } from 'vue';
 
 export const useUniverStore = defineStore('univer', {
     state: () => ({
         univerAPI: null as FUniver | null,
         workbook: null as FWorkbook | null,
+        formulaService: null as any,
 
         reRenderStates: null as any,
 
@@ -28,6 +31,8 @@ export const useUniverStore = defineStore('univer', {
             this.univerAPI = markRaw(api) as FUniver;
             (window as any).univerAPI = this.univerAPI;
             this.workbook = markRaw(this.univerAPI.getActiveWorkbook() as FWorkbook) as FWorkbook;
+
+            this.formulaService = this.univerAPI.getFormula()['_functionService'];
 
             this.initCommandListener();
         },
@@ -100,6 +105,14 @@ export const useUniverStore = defineStore('univer', {
             );
 
             console.log(this.transferOptions);
+        },
+
+        async getFormulaInfo(formulaName: string) {
+            if (!this.formulaService || formulaName === '') return;
+
+            const formulaInfo = await this.formulaService.getDescription(formulaName);
+
+            return formulaInfo;
         },
     },
 });
