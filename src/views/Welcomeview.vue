@@ -35,12 +35,12 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const goToHome = () => {
-    router.push('/home'); // 跳转到你的主页
+    router.push('/index'); // 跳转到你的主页
 };
 </script>
 

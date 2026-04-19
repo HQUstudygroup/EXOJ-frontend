@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
     {
-        name: 'index',
+        name: 'root',
         path: '/',
         redirect: '/welcome',
     },
@@ -11,14 +11,9 @@ const routes = [
         component: () => import('@/layout/DefaultLayout.vue'),
         children: [
             {
-                name: 'home',
-                path: 'home',
-                component: () => import('@/views/HomeView.vue'),
-            },
-            {
-                name: 'about',
-                path: 'about',
-                component: () => import('@/components/About.vue'),
+                name: 'index',
+                path: 'index',
+                component: () => import('@/views/IndexView.vue'),
             },
             {
                 name: 'extry',
@@ -26,6 +21,11 @@ const routes = [
                 component: () => import('@/components/HelloWorld.vue'),
             },
         ],
+    },
+    {
+        name: 'welcome',
+        path: '/welcome',
+        component: () => import('@/views/WelcomeView.vue'),
     },
     {
         name: 'upload',
@@ -41,11 +41,6 @@ const routes = [
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('@/views/NotFoundView.vue'),
-    },
-    {
-        path: '/welcome',
-        name: 'welcome',
-        component: () => import('@/views/Welcomeview.vue'),
     },
 ];
 
