@@ -1977,10 +1977,34 @@ const FileTypeChange = [
     },
 ];
 
+const DataVisualizationType = [
+    { label: '折线图', key: 'line' },
+    { label: '柱状图', key: 'bar' },
+    { label: '散点图', key: 'scatter' },
+    { label: '平滑折线', key: 'smooth-line' },
+    { label: '直方图', key: 'histogram' },
+    { label: '箱线图', key: 'boxplot' },
+    { label: '热力图', key: 'heatmap' },
+    { label: '饼图', key: 'pie' },
+
+    { label: '堆叠柱状图', key: 'stacked-bar' },
+    { label: '分组柱状图', key: 'grouped-bar' },
+    { label: '百分比柱状图', key: 'percent-bar' },
+
+    { label: '面积图', key: 'area' },
+    { label: '趋势线', key: 'trend-line' },
+    { label: '移动平均线', key: 'moving-average' },
+
+    { label: '漏斗图', key: 'funnel' },
+    { label: '桑基图', key: 'sankey' },
+    { label: 'K 线图', key: 'candlestick' },
+];
+
 const asideOptions: MenuOption[] = [
     {
         label: '数据可视化',
-        key: 'data--visualization',
+        key: 'data-visualization',
+        children: DataVisualizationType,
     },
 
     {
@@ -1993,12 +2017,12 @@ const asideOptions: MenuOption[] = [
     },
     {
         label: '文件格式转换',
-        key: 'change',
+        key: 'change-file-type',
         children: FileTypeChange,
     },
     {
         label: '表格函数',
-        key: 'SheetFunctions',
+        key: 'sheet-functions',
         children: SheetFunctions,
     },
 ];

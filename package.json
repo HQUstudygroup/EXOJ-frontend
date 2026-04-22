@@ -19,6 +19,7 @@
         "@univerjs/presets": "^0.20.0",
         "@vicons/ionicons5": "^0.13.0",
         "axios": "^1.14.0",
+        "echarts": "^6.0.0",
         "katex": "^0.16.45",
         "naive-ui": "^2.44.1",
         "pinia": "^3.0.4",

@@ -6,6 +6,7 @@
             type="primary"
             size="small"
             :focusable="false"
+            @click="goAnalyze"
         >
             <template #icon>
                 <n-icon>
@@ -21,7 +22,6 @@
             virtual-scroll
             source-filterable
             target-filterable
-            @update:value="handleChange"
             class="box-border h-full p-3"
         >
         </n-transfer>
@@ -30,15 +30,26 @@
 
 <script setup lang="ts">
 import { ArrowForwardOutline } from '@vicons/ionicons5';
-import { useUniverStore } from '@/stores/univer';
-
 import { ref } from 'vue';
 
+import { useUniverStore } from '@/stores/univer';
+import { useMenuStore } from '@/stores/menu';
+import { logger } from '@/utils/logger';
+
+const menuStore = useMenuStore();
 const univerStore = useUniverStore();
 const transferValue = ref();
 
-function handleChange() {
-    console.log('当前选中:', transferValue.value); // arrays
+async function goAnalyze() {
+    if (!transferValue.value) {
+        logger.error('似乎没有选择任何字段进行分析');
+        return;
+    }
+
+    if (!menuStore.isDataVisualization) {
+        logger.error('还没选择数据可视化类别');
+        return;
+    }
 }
 </script>
 

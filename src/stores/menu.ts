@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useUniverStore } from './univer';
+import CATEGORY_MAP from '@/components/SideBar/asideCategoryMap';
 
 const univerStore = useUniverStore();
 
@@ -11,6 +12,11 @@ export const useMenuStore = defineStore('menu', {
 
         showFormulaInfoModal: false as boolean,
     }),
+
+    getters: {
+        isDataVisualization: (state) =>
+            CATEGORY_MAP['data-visualization'].includes(state.activeKey),
+    },
 
     actions: {
         async openFormulaInfoModal() {

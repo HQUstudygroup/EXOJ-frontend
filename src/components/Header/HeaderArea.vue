@@ -17,7 +17,7 @@
                 查看数据
             </n-button>
 
-            <n-upload :show-file-list="false" @change="handleFileChange">
+            <n-upload multiple :show-file-list="false" @change="handleFileChange">
                 <n-button strong round :focusable="false" type="info"> 上传数据 </n-button>
             </n-upload>
 
