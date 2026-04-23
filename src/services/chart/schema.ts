@@ -83,7 +83,6 @@ const CHART_PARAM_SCHEMA: Record<ChartUIKey, any> = {
         name: 'sankey',
         type: 'sankey',
         required: ['source', 'target', 'value'],
-        optional: ['links'],
     },
     candlestick: {
         name: 'candlestick',

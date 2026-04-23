@@ -7,6 +7,8 @@ export function generateSankey(gridName: string = '桑基图', data: any[] | { l
         name,
     }));
 
+    console.log(nodes);
+
     return {
         title: {
             text: gridName,
@@ -16,6 +18,7 @@ export function generateSankey(gridName: string = '桑基图', data: any[] | { l
         tooltip: { trigger: 'item' },
         series: [
             {
+                name: '节点',
                 type: 'sankey',
                 data: nodes,
                 links: realData.map((i: { source: string; target: string; value: number }) => ({
@@ -23,9 +26,15 @@ export function generateSankey(gridName: string = '桑基图', data: any[] | { l
                     target: i.target,
                     value: i.value,
                 })),
+                emphasis: {
+                    focus: 'adjacency',
+                },
+                lineStyle: {
+                    color: 'source',
+                    curveness: 0.5,
+                },
             },
         ],
-        legend: {},
         toolbox: {
             feature: {
                 dataView: {
