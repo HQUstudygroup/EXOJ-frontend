@@ -1,57 +1,41 @@
 import { getMessageInstance } from './message';
 
-type MsgOptions = {
-    duration?: number;
-};
+const DEFAULT_DURATION_SEC = 5;
 
-const DEFAULT_DURATION = 5000;
+const toMS = (sec: number) => ({ duration: sec * 1000 });
 
+/**
+ * 全局日志与消息提示工具
+ * @param content 提示内容
+ * @param duration 停留时长（秒）
+ */
 export const logger = {
-    info(content: string, options: MsgOptions = {}) {
+    /** @param content 提示内容 @param duration 停留时长 (秒) */
+    info(content: string, duration = DEFAULT_DURATION_SEC) {
         console.log('[INFO]', content);
-
-        const { duration = DEFAULT_DURATION } = options;
-
-        getMessageInstance().info(content, {
-            duration,
-        });
+        getMessageInstance().info(content, toMS(duration));
     },
 
-    success(content: string, options: MsgOptions = {}) {
+    /** @param content 提示内容 @param duration 停留时长 (秒) */
+    success(content: string, duration = DEFAULT_DURATION_SEC) {
         console.log('[SUCCESS]', content);
-
-        const { duration = DEFAULT_DURATION } = options;
-
-        getMessageInstance().success(content, {
-            duration,
-        });
+        getMessageInstance().success(content, toMS(duration));
     },
 
-    warning(content: string, options: MsgOptions = {}) {
+    /** @param content 提示内容 @param duration 停留时长 (秒) */
+    warning(content: string, duration = DEFAULT_DURATION_SEC) {
         console.warn('[WARNING]', content);
-
-        const { duration = DEFAULT_DURATION } = options;
-
-        getMessageInstance().warning(content, {
-            duration,
-        });
+        getMessageInstance().warning(content, toMS(duration));
     },
 
-    error(content: string, options: MsgOptions = {}) {
+    /** @param content 提示内容 @param duration 停留时长 (秒) */
+    error(content: string, duration = DEFAULT_DURATION_SEC) {
         console.error('[ERROR]', content);
-
-        const { duration = DEFAULT_DURATION } = options;
-
-        getMessageInstance().error(content, {
-            duration,
-        });
+        getMessageInstance().error(content, toMS(duration));
     },
 
-    loading(content: string, options: MsgOptions = {}) {
-        const { duration = DEFAULT_DURATION } = options;
-
-        return getMessageInstance().loading(content, {
-            duration,
-        });
+    /** @param content 提示内容 @param duration 停留时长 (秒) */
+    loading(content: string, duration = DEFAULT_DURATION_SEC) {
+        return getMessageInstance().loading(content, toMS(duration));
     },
 };
