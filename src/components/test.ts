@@ -210,19 +210,33 @@ export const chartTestData = {
     ],
 
     // 📉 candlestick（完整版）
-    candlestick: Array.from({ length: 40 }).map((_, i) => {
-        const open = 100 + Math.random() * 20;
-        const close = open + (Math.random() - 0.5) * 10;
-        const low = Math.min(open, close) - Math.random() * 5;
-        const high = Math.max(open, close) + Math.random() * 5;
-
-        return {
-            time: `2024-01-${String(i + 1).padStart(2, '0')}`,
-            open: Math.round(open),
-            close: Math.round(close),
-            low: Math.round(low),
-            high: Math.round(high),
-            volume: Math.round(Math.random() * 5000),
-        };
-    }),
+    candlestick: [
+        { time: '2023-11-01', open: 105.0, close: 106.2, low: 104.5, high: 107.0, volume: 42000 },
+        { time: '2023-11-02', open: 106.2, close: 108.5, low: 106.0, high: 109.1, volume: 48000 },
+        { time: '2023-11-03', open: 108.5, close: 107.8, low: 107.0, high: 109.5, volume: 41000 },
+        { time: '2023-11-06', open: 107.8, close: 109.0, low: 107.5, high: 110.2, volume: 45000 },
+        { time: '2023-11-07', open: 109.0, close: 110.5, low: 108.8, high: 111.0, volume: 52000 },
+        {
+            time: '2023-11-08',
+            open: 110.5,
+            close: 106.8,
+            low: 106.0,
+            high: 111.2,
+            volume: 85000,
+        },
+        { time: '2023-11-09', open: 106.8, close: 105.2, low: 104.5, high: 107.5, volume: 62000 },
+        { time: '2023-11-10', open: 105.2, close: 106.0, low: 104.8, high: 106.5, volume: 38000 },
+        { time: '2023-11-13', open: 106.0, close: 104.5, low: 104.0, high: 106.8, volume: 35000 },
+        { time: '2023-11-14', open: 104.5, close: 103.2, low: 102.5, high: 105.0, volume: 31000 },
+        { time: '2023-11-15', open: 103.2, close: 104.8, low: 103.0, high: 105.5, volume: 44000 },
+        { time: '2023-11-16', open: 104.8, close: 105.5, low: 104.2, high: 106.3, volume: 41000 },
+        { time: '2023-11-17', open: 105.5, close: 107.2, low: 105.0, high: 108.0, volume: 49000 },
+        { time: '2023-11-20', open: 107.2, close: 108.8, low: 107.0, high: 109.5, volume: 53000 },
+        { time: '2023-11-21', open: 108.8, close: 110.2, low: 108.5, high: 111.0, volume: 58000 },
+        { time: '2023-11-22', open: 110.2, close: 112.5, low: 110.0, high: 113.0, volume: 72000 },
+        { time: '2023-11-23', open: 112.5, close: 111.8, low: 111.0, high: 113.5, volume: 45000 },
+        { time: '2023-11-24', open: 111.8, close: 113.0, low: 111.5, high: 114.0, volume: 50000 },
+        { time: '2023-11-27', open: 113.0, close: 115.5, low: 112.8, high: 116.2, volume: 68000 },
+        { time: '2023-11-28', open: 115.5, close: 117.0, low: 115.0, high: 118.0, volume: 75000 },
+    ],
 };
