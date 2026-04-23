@@ -1,4 +1,4 @@
-import { type ChartUIKey } from './types';
+import { type ChartUIKey } from '../../models/chartTypes';
 
 const CHART_PARAM_SCHEMA: Record<ChartUIKey, any> = {
     line: {

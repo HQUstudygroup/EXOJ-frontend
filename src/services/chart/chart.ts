@@ -1,6 +1,6 @@
 import * as chartEngine from './engines';
 
-import type { ChartUIKey, ChartTypes } from './types';
+import type { ChartUIKey, ChartTypes } from '../../models/chartTypes';
 import { CHART_PARAM_SCHEMA } from './schema';
 import { logger } from '@/utils/logger';
 
