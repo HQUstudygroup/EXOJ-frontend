@@ -81,7 +81,12 @@ export function generateCandlestick(gridName: string = 'K 线图', data: any[]) 
                 color: (params: any) => {
                     const i = params.dataIndex;
                     const item = data[i];
-                    return item.close >= item.open ? UP_COLOR : DOWN_COLOR;
+
+                    if (!item) return UP_COLOR;
+
+                    const isUp = item.close >= item.open;
+
+                    return isUp ? UP_COLOR : DOWN_COLOR;
                 },
             },
         });
