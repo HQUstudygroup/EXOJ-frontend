@@ -1,7 +1,9 @@
 <template>
-    <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
-        <router-view />
-    </n-config-provider>
+    <n-message-provider>
+        <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
+            <router-view />
+        </n-config-provider>
+    </n-message-provider>
 </template>
 
 <script setup lang="ts">

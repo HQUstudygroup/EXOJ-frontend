@@ -89,6 +89,7 @@
 
 <script lang="ts" setup>
 import { useMenuStore } from '@/stores/menu';
+import { MemoryCursor } from '@univerjs/presets';
 
 import { NButton } from 'naive-ui';
 import { computed } from 'vue';
@@ -96,12 +97,16 @@ import { computed } from 'vue';
 const menuStore = useMenuStore();
 
 const syntax = computed(() => {
+    if (menuStore.formulaInfo === undefined) return;
+
     return `${menuStore.formulaInfo?.functionName}(${menuStore.formulaInfo?.functionParameter
         .map((p: any) => (p.require ? p.name : `[${p.name}]`))
         .join(', ')})`;
 });
 
 const example = computed(() => {
+    if (menuStore.formulaInfo === undefined) return;
+
     return `${menuStore.formulaInfo?.functionName}(${menuStore.formulaInfo?.functionParameter.map((p: any) => p.example).join(', ')})`;
 });
 </script>

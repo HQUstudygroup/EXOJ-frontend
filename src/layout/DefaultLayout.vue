@@ -32,6 +32,12 @@ import AssistantModal from '@/components/AssistantChat/AssistantModal.vue';
 import FunctionModal from '@/components/SideBar/FunctionModal.vue';
 import HeaderArea from '@/components/Header/HeaderArea.vue';
 import AsideArea from '@/components/SideBar/AsideArea.vue';
+
+import { useMessage } from 'naive-ui';
+import { setMessageInstance } from '@/utils/message';
+
+const message = useMessage();
+setMessageInstance(message);
 </script>
 
 <style sc></style>
