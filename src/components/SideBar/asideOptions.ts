@@ -1976,15 +1976,45 @@ const FileTypeChange = [
         key: 'ecw',
     },
 ];
+import { RouterLink } from 'vue-router';
+import { h } from 'vue';
 
 const asideOptions: MenuOption[] = [
+    {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: 'index',
+                        params: {
+                            lang: 'zh-CN',
+                        },
+                    },
+                },
+                { default: () => '数据分析' }
+            ),
+        key: 'go-home',
+    },
     {
         label: '数据可视化',
         key: 'data--visualization',
     },
 
     {
-        label: '多文件合并',
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: 'extry',
+                        params: {
+                            lang: 'zh-CN',
+                        },
+                    },
+                },
+                { default: () => '多文件合并' }
+            ),
         key: 'merge-files',
     },
     {

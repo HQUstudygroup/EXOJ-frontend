@@ -87,7 +87,7 @@ export const useAiAssistantStore = defineStore('askassistant', {
          * @param {string} prompt - 用户输入的提示词
          * @returns {Promise<void>}
          */
-        async requestAssistant(prompt: string) {
+        async requestAssistant(prompt: string, scene: string, analyzeData?: []) {
             const id = this.taskId;
 
             let session_id = localStorage.getItem('session_id');
@@ -109,6 +109,9 @@ export const useAiAssistantStore = defineStore('askassistant', {
             try {
                 if (id !== this.taskId) return;
 
+                if (scene === 'analyze') {
+                    prompt;
+                }
                 const response = await chatAPI({
                     baseURL,
                     session_id,

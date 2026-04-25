@@ -1,5 +1,7 @@
 <template>
-    <uni-table :content-class="'w-full h-4/5'"></uni-table>
+    <div>
+        <upload></upload>
+    </div>
 </template>
 
 <script setup lang="ts"></script>

@@ -4,12 +4,22 @@
             v-model="prompt"
             :loading="AiAssistantStore.isInputLoading"
             :textarea-props="{
-                placeholder: '请输入消息...',
+                placeholder: scene === 'default' ? '需要我帮你做什么吗？' : '输入你的分析需求',
                 class: 'max-h-12 overflow-hidden',
             }"
             @send="handlerSendMessage"
             @stop="AiAssistantStore.stopCurrentTask"
         >
+            <template #input-prefix v-if="route.path === '/index'">
+                <n-select
+                    v-model:value="scene"
+                    :options="sceneOptions"
+                    :show-arrow="false"
+                    size="tiny"
+                    :consistent-menu-width="false"
+                    class="w-20 [&_>*]:rounded-full mr-2 ![&_*]:p-0 text-center"
+                />
+            </template>
             <template #footer-prefix>
                 <n-select
                     v-model:value="value"
@@ -24,10 +34,24 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useAiAssistantStore } from '@/stores/aiAssistant';
+import { useAiAssistantStore } from '@/stores/AiAssistant';
+import { useRoute } from 'vue-router';
+const route = useRoute();
 
 const value = ref('openclaw/default');
 const prompt = ref('');
+const scene = ref<string>('default');
+
+const sceneOptions = [
+    {
+        label: '默认问答',
+        value: 'default',
+    },
+    {
+        label: '数据分析',
+        value: 'analyze',
+    },
+];
 
 const assistantModelOptions = [
     {
@@ -57,7 +81,7 @@ const AiAssistantStore = useAiAssistantStore();
 const handlerSendMessage = function () {
     if (AiAssistantStore.isInputLoading || !prompt.value) return;
 
-    AiAssistantStore.requestAssistant(prompt.value);
+    AiAssistantStore.requestAssistant(prompt.value, scene.value);
     prompt.value = '';
 };
 </script>

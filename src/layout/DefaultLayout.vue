@@ -24,6 +24,7 @@
     <!-- 弹窗组件 -->
     <FunctionModal></FunctionModal>
     <AssistantModal></AssistantModal>
+    <flowbutton></flowbutton>
 </template>
 
 <script setup lang="ts">
