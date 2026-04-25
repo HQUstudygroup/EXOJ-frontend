@@ -916,6 +916,9 @@ const deleteTemplate = (name) => {
 const saveTemplate = () => {
     if (!templateName.value) {
         errMsg.value = '请输入模板名称';
+        setTimeout(() => {
+            errMsg.value = '';
+        }, 3000);
         return;
     }
     localStorage.setItem('excel-template-' + templateName.value, JSON.stringify(columns.value));
