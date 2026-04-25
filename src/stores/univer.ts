@@ -64,11 +64,22 @@ export const useUniverStore = defineStore('univer', {
             }, 200);
 
             this.workbook.onCommandExecuted((command: any) => {
-                console.log(command);
                 if (command.id.startsWith('sheet.mutation.')) {
                     this.reRenderStates();
                 }
             });
+        },
+
+        filterData(dataList: any[][], filterOutDataList: number[]) {
+            const excludeSet = new Set(filterOutDataList);
+
+            const result = dataList
+                .filter((_, index) => {
+                    return index !== 0 && !excludeSet.has(index);
+                })
+                .map((item) => item[0]);
+
+            return result;
         },
 
         async importExcel(file: File) {
@@ -113,6 +124,36 @@ export const useUniverStore = defineStore('univer', {
             const formulaInfo = await this.formulaService.getDescription(formulaName);
 
             return formulaInfo;
+        },
+
+        async getDataFromCols(colsHeaders: string[]) {
+            return colsHeaders.reduce<Record<string, any>>((acc, item) => {
+                const parts = item.split('_');
+                const tableName = parts[0];
+                const colName = parts[1];
+
+                const dataSheet = this.workbook?.getSheetByName(tableName);
+                if (!dataSheet) return acc;
+
+                const dataHeaders = dataSheet
+                    .getRange(0, 0, 1, dataSheet.getLastColumn() + 1)
+                    .getValues()[0];
+
+                const colIndex = dataHeaders?.indexOf(colName);
+                if (colIndex === -1 || colIndex === undefined) return acc;
+
+                const colData = dataSheet
+                    .getRange(0, colIndex, dataSheet.getLastRow() + 1, 1)
+                    .getValues();
+
+                const filteredOutRows = dataSheet.getFilter()?.getFilteredOutRows() || [];
+
+                const finalData = this.filterData(colData as any[][], filteredOutRows as number[]);
+
+                acc[item] = finalData;
+
+                return acc;
+            }, {});
         },
     },
 });
