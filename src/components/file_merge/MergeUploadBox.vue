@@ -48,12 +48,15 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+
+import type { UploadFileInfo } from 'naive-ui';
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5';
 import MergeExcel from './MergeExcel.vue';
+import Datatable from './DataTable.vue';
+
+import { logger } from '@/utils/logger';
 
 const fileList = ref<any[]>([]);
-
-import Datatable from './DataTable.vue';
 
 const tableData = ref<any[][]>([]);
 
@@ -61,13 +64,11 @@ function handleResult(data: any[][]) {
     tableData.value = data;
 }
 
-import type { UploadFileInfo } from 'naive-ui';
-
 async function beforeUpload(data: { file: UploadFileInfo; fileList: UploadFileInfo[] }) {
     if (
         data.file.file?.type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ) {
-        console.error('只能上传xlsx');
+        logger.error('只能上传xlsx');
         return false;
     }
     return true;

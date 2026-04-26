@@ -2031,7 +2031,7 @@ const asideOptions: MenuOption[] = [
                 RouterLink,
                 {
                     to: {
-                        name: 'extry',
+                        name: 'merge-files',
                         params: {
                             lang: 'zh-CN',
                         },

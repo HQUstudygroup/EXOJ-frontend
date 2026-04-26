@@ -20,6 +20,11 @@ const routes = [
                 path: 'extry',
                 component: () => import('@/components/HelloWorld.vue'),
             },
+            {
+                name: 'merge-files',
+                path: 'merge-files',
+                component: () => import('@/views/MergeFilesView.vue'),
+            },
         ],
     },
     {
