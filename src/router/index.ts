@@ -18,7 +18,7 @@ const routes = [
             {
                 name: 'extry',
                 path: 'extry',
-                component: () => import('@/components/HelloWorld.vue'),
+                component: () => import('@/views/formatStandardizationView.vue'),
             },
             {
                 name: 'merge-files',
