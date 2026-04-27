@@ -1,8 +1,11 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { logger } from './logger';
 
 async function getHTMLElement(DOMSelector: string) {
-    return document.querySelector(DOMSelector) as HTMLElement;
+    const HTMLEl = document.querySelector(DOMSelector) as HTMLElement;
+    if (!HTMLEl) logger.error('没有任何分析数据');
+    return HTMLEl;
 }
 
 async function renderCanvas(el: HTMLElement) {
