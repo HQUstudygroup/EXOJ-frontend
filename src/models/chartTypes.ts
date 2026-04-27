@@ -1,9 +1,10 @@
-export type Chart = {
+type Chart = {
     chartName: string;
+    chartType: ChartTypes;
     data: any[];
 };
 
-export type TabItem = {
+type TabItem = {
     tabName: string;
     charts: Chart[];
 };
@@ -29,4 +30,4 @@ type ChartUIKey =
 
 type ChartTypes = ChartUIKey;
 
-export type { ChartUIKey, ChartTypes };
+export type { ChartUIKey, ChartTypes, Chart, TabItem };

@@ -110,8 +110,8 @@ export const useUniverStore = defineStore('univer', {
                 ...matrix[0]
                     .filter((item) => item !== '')
                     .map((item) => ({
-                        label: `${sheetName}_${item}`,
-                        value: `${sheetName}_${item}`,
+                        label: `${sheetName} ─ ${item}`,
+                        value: `${sheetName} ─ ${item}`,
                     }))
             );
 
@@ -128,7 +128,7 @@ export const useUniverStore = defineStore('univer', {
 
         async getDataFromCols(colsHeaders: string[]) {
             return colsHeaders.reduce<Record<string, any>>((acc, item) => {
-                const parts = item.split('_');
+                const parts = item.split(' ─ ');
                 const tableName = parts[0];
                 const colName = parts[1];
 

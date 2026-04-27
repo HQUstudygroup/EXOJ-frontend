@@ -32,6 +32,12 @@ export function generateGroupedBar(gridName: string = '分组柱状图', data: a
                     show: true,
                     title: '恢复',
                 },
+                saveAsImage: {
+                    type: 'png',
+                    name: gridName,
+                    title: '点击下载',
+                    pixelRatio: 2,
+                },
             },
         },
         dataZoom: [

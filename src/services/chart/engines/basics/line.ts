@@ -34,6 +34,12 @@ export function generateLine(gridName: string = '折线图', data: any[]) {
                     show: true,
                     title: '恢复',
                 },
+                saveAsImage: {
+                    type: 'png',
+                    name: gridName,
+                    title: '点击下载',
+                    pixelRatio: 2,
+                },
             },
         },
         dataZoom: [

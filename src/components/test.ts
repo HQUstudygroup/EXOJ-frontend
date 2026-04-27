@@ -73,12 +73,33 @@ export const chartTestData = {
     ],
 
     'stacked-bar': [
+        // Q1
         { x: 'Q1', group: 'Apple', y: 120 },
         { x: 'Q1', group: 'Samsung', y: 80 },
+        { x: 'Q1', group: 'Xiaomi', y: 60 },
+        { x: 'Q1', group: 'OPPO', y: 45 },
+        { x: 'Q1', group: 'Vivo', y: 35 },
+
+        // Q2
         { x: 'Q2', group: 'Apple', y: 150 },
         { x: 'Q2', group: 'Samsung', y: 90 },
+        { x: 'Q2', group: 'Xiaomi', y: 75 },
+        { x: 'Q2', group: 'OPPO', y: 50 },
+        { x: 'Q2', group: 'Vivo', y: 40 },
+
+        // Q3
         { x: 'Q3', group: 'Apple', y: 180 },
         { x: 'Q3', group: 'Samsung', y: 110 },
+        { x: 'Q3', group: 'Xiaomi', y: 85 },
+        { x: 'Q3', group: 'OPPO', y: 55 },
+        { x: 'Q3', group: 'Vivo', y: 42 },
+
+        // Q4 (通常是旺季，数值调高了些)
+        { x: 'Q4', group: 'Apple', y: 230 },
+        { x: 'Q4', group: 'Samsung', y: 140 },
+        { x: 'Q4', group: 'Xiaomi', y: 100 },
+        { x: 'Q4', group: 'OPPO', y: 70 },
+        { x: 'Q4', group: 'Vivo', y: 60 },
     ],
 
     'percent-bar': [

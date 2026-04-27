@@ -47,6 +47,12 @@ export function generateSankey(gridName: string = '桑基图', data: any[] | { l
                     show: true,
                     title: '恢复',
                 },
+                saveAsImage: {
+                    type: 'png',
+                    name: gridName,
+                    title: '点击下载',
+                    pixelRatio: 2,
+                },
             },
         },
         dataZoom: [{ type: 'inside' }, { type: 'slider', height: 20, bottom: 60 }],

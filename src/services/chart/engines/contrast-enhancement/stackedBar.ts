@@ -36,6 +36,12 @@ export function generateStackedBar(gridName: string = '堆叠柱状图', data: a
                     show: true,
                     title: '恢复',
                 },
+                saveAsImage: {
+                    type: 'png',
+                    name: gridName,
+                    title: '点击下载',
+                    pixelRatio: 2,
+                },
             },
         },
         dataZoom: [

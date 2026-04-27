@@ -1,9 +1,5 @@
 import { dbPromise } from './db';
-
-type Chart = {
-    chartName: string;
-    data: any[];
-};
+import type { Chart } from '@/models/chartTypes';
 
 /**
  * 判断指定 tab 是否存在
@@ -25,7 +21,7 @@ async function isTabExist(tabName: string): Promise<boolean> {
  * @param tabName tab 名称
  * @param chart 图表数据
  */
-async function addChartToTab(tabName: string, chart: Chart) {
+async function addChartToTab(tabName: string, chartData: Chart[]) {
     const db = await dbPromise;
 
     let chartTab = await db.get('chartTabs', tabName);
@@ -39,7 +35,7 @@ async function addChartToTab(tabName: string, chart: Chart) {
         await db.add('chartTabs', chartTab);
     }
 
-    chartTab.charts.push(structuredClone(chart));
+    chartTab.charts.push(...structuredClone(chartData));
 
     await db.put('chartTabs', chartTab);
 }

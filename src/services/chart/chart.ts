@@ -2,7 +2,9 @@ import * as chartEngine from './engines';
 
 import type { ChartUIKey, ChartTypes } from '../../models/chartTypes';
 import { CHART_PARAM_SCHEMA } from './schema';
+
 import { logger } from '@/utils/logger';
+import transform from '@/utils/transformData';
 
 const ENGINE_MAP = {
     line: chartEngine.generateLine,
@@ -31,8 +33,8 @@ function getChartSchema(key: ChartUIKey) {
     return CHART_PARAM_SCHEMA[key];
 }
 
-function generateChart(key: ChartUIKey, data: any[]) {
-    const schema = CHART_PARAM_SCHEMA[key];
+function generateChart(chartName: string, chartType: ChartTypes, data: any[]) {
+    const schema = CHART_PARAM_SCHEMA[chartType];
     if (!schema) {
         logger.error('没有这个类别的图表');
         return;
@@ -42,7 +44,8 @@ function generateChart(key: ChartUIKey, data: any[]) {
 
     if (!engine) throw new Error(`Unknown chart type: ${schema.type}`);
 
-    return engine(undefined, data);
+    data = transform(data);
+    return engine(chartName, data);
 }
 
 export { getChartSchema, generateChart };

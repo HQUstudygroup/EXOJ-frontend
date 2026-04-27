@@ -181,7 +181,7 @@ export function generateCandlestick(gridName: string = 'K 线图', data: any[]) 
                   {
                       left: '10%',
                       right: '8%',
-                      top: '73%',
+                      top: '70%',
                       bottom: '15%',
                   },
               ]
@@ -189,7 +189,7 @@ export function generateCandlestick(gridName: string = 'K 线图', data: any[]) 
                   {
                       left: '10%',
                       right: '8%',
-                      bottom: '15%',
+                      bottom: '20%',
                   },
               ],
 
@@ -209,8 +209,8 @@ export function generateCandlestick(gridName: string = 'K 线图', data: any[]) 
             {
                 type: 'slider',
                 xAxisIndex: 'all',
-                height: 20,
-                bottom: '8%',
+                height: 15,
+                bottom: '10%',
             },
         ],
 
@@ -220,7 +220,7 @@ export function generateCandlestick(gridName: string = 'K 线图', data: any[]) 
             bottom: 10,
             left: 'center',
 
-            data: ['K-Line', 'MA5', 'MA10', 'Volume'],
+            data: hasVolume ? ['K-Line', 'MA5', 'MA10', 'Volume'] : ['K-Line', 'MA5', 'MA10'],
 
             z: 4,
             show: true,
@@ -264,6 +264,12 @@ export function generateCandlestick(gridName: string = 'K 线图', data: any[]) 
                 restore: {
                     show: true,
                     title: '恢复',
+                },
+                saveAsImage: {
+                    type: 'png',
+                    name: gridName,
+                    title: '点击下载',
+                    pixelRatio: 2,
                 },
             },
         },
