@@ -1,7 +1,7 @@
 import { type FUniver } from '@univerjs/presets';
 import { type FWorkbook } from '@univerjs/preset-sheets-core';
 
-import readXlsx from '@/utils/xlsxUtil';
+import { readXlsx } from '@/utils/xlsxUtil';
 import debounce from '@/utils/debounce';
 
 import { defineStore } from 'pinia';

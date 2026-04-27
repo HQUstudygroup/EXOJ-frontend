@@ -24,9 +24,7 @@ function readXlsx(file: File): Promise<any[][]> {
     });
 }
 
-export default readXlsx;
-
-export function exportXlsx(data: any[][], fileName = '合并结果.xlsx') {
+function exportXlsx(data: any[][], fileName = '合并结果.xlsx') {
     // 1. 转 sheet
     const worksheet = XLSX.utils.aoa_to_sheet(data);
 
@@ -37,3 +35,5 @@ export function exportXlsx(data: any[][], fileName = '合并结果.xlsx') {
     // 3. 导出
     XLSX.writeFile(workbook, fileName);
 }
+
+export { readXlsx, exportXlsx };
