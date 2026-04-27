@@ -44,6 +44,12 @@ export function generateMovingAverage(gridName: string = '移动平均线', data
                     show: true,
                     title: '恢复',
                 },
+                saveAsImage: {
+                    type: 'png',
+                    name: gridName,
+                    title: '点击下载',
+                    pixelRatio: 2,
+                },
             },
         },
         legend: {},
