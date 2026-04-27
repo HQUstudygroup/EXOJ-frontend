@@ -52,6 +52,12 @@ export function generateTrendLine(gridName: string = '趋势线', data: any[]) {
                     show: true,
                     title: '恢复',
                 },
+                saveAsImage: {
+                    type: 'png',
+                    name: gridName,
+                    title: '点击下载',
+                    pixelRatio: 2,
+                },
             },
         },
         legend: {},
