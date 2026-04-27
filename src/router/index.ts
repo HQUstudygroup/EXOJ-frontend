@@ -16,9 +16,9 @@ const routes = [
                 component: () => import('@/views/IndexView.vue'),
             },
             {
-                name: 'extry',
-                path: 'extry',
-                component: () => import('@/components/HelloWorld.vue'),
+                name: 'analyze-page',
+                path: 'analyze-page',
+                component: () => import('@/views/AnalizeView.vue'),
             },
         ],
     },
