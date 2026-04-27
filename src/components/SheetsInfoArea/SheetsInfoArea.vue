@@ -12,7 +12,9 @@
         <div v-if="!univerStore.sheetsInfo.length" class="h-full flex justify-center items-center">
             <n-empty description="暂无分析数据">
                 <template #extra>
-                    <n-button size="small" type="primary"> 去分析 </n-button>
+                    <n-upload :show-file-list="false" @change="handleFileChange">
+                        <n-button size="small" type="primary"> 去分析 </n-button>
+                    </n-upload>
                 </template>
             </n-empty>
         </div>
@@ -53,6 +55,14 @@ import { useUniverStore } from '@/stores/univer';
 import { ListSharp } from '@vicons/ionicons5';
 
 const univerStore = useUniverStore();
+
+const handleFileChange = async (options: any) => {
+    const file = options.file?.file || options.file;
+
+    if (!file) return;
+
+    await univerStore.importExcel(file);
+};
 </script>
 
 <style scoped></style>
