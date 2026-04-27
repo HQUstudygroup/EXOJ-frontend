@@ -43,7 +43,7 @@ const isRightSide = computed(() => {
 
 const aiAssistantStore = useAiAssistantStore();
 
-const x = ref(280);
+const x = ref(20);
 const y = ref(70);
 
 let offsetX = 0;
