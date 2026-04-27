@@ -21,14 +21,14 @@ const routes = [
                 component: () => import('@/views/AnalizeView.vue'),
             },
             {
-                name: 'extry',
-                path: 'extry',
-                component: () => import('@/views/formatStandardizationView.vue'),
-            },
-            {
                 name: 'merge-files',
                 path: 'merge-files',
                 component: () => import('@/views/MergeFilesView.vue'),
+            },
+            {
+                name: 'format-files',
+                path: 'format-files',
+                component: () => import('@/views/formatStandardizationView.vue'),
             },
         ],
     },

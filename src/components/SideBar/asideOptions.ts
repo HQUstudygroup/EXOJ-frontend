@@ -2050,10 +2050,7 @@ const asideOptions: MenuOption[] = [
                 RouterLink,
                 {
                     to: {
-                        name: 'extry',
-                        params: {
-                            lang: 'zh-CN',
-                        },
+                        name: 'format-files',
                     },
                 },
                 { default: () => '文件格式标准化' }
