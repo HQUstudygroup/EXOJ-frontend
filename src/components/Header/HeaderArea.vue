@@ -13,8 +13,14 @@
                 我的数据
             </n-button>
 
-            <n-button strong round :focusable="false" class="c-black bg-white b-solid b-0.5">
-                查看数据
+            <n-button
+                strong
+                round
+                :focusable="false"
+                class="c-black bg-white b-solid b-0.5"
+                @click="router.push('/analyze-page')"
+            >
+                查看分析结果
             </n-button>
 
             <n-upload multiple :show-file-list="false" @change="handleFileChange">
@@ -40,9 +46,14 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
 import { Sparkles } from '@vicons/ionicons5';
+
 import { useUniverStore } from '@/stores/univer';
 import { useAiAssistantStore } from '@/stores/aiAssistant';
+
+const router = useRouter();
 
 const univerStore = useUniverStore();
 const aiAssistantStore = useAiAssistantStore();

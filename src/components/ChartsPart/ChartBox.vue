@@ -1,6 +1,6 @@
 <template>
     <div class="w-full h-2/3">
-        <div ref="el" class="w-full h-full" />
+        <div ref="el" class="w-full h-100 flex justify-center" />
     </div>
 </template>
 
@@ -9,6 +9,7 @@ import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 import * as echarts from 'echarts';
 
 const props = defineProps<{
+    contentWidth: number;
     option: any;
 }>();
 
@@ -20,11 +21,11 @@ function render() {
 
     if (!chart) {
         chart = echarts.init(el.value);
-
-        window.addEventListener('resize', resize);
     }
 
     if (!props.option) return;
+
+    resize();
 
     chart.setOption(props.option, {
         notMerge: false,
@@ -33,23 +34,21 @@ function render() {
 }
 
 function resize() {
-    chart?.resize();
+    if (!el.value) return;
+
+    chart?.resize({
+        width: (el.value.clientWidth * props.contentWidth) / 100,
+    });
 }
 
-watch(
-    () => props.option,
-    () => {
-        render();
-    },
-    { deep: true }
-);
+watch(() => props.option, render);
+watch(() => props.contentWidth, resize);
 
 onMounted(() => {
     render();
 });
 
 onBeforeUnmount(() => {
-    window.removeEventListener('resize', resize);
     chart?.dispose();
     chart = null;
 });
