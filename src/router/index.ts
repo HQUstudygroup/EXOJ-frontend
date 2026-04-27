@@ -63,9 +63,9 @@ const router = createRouter({
 router.afterEach((to, from) => {
     if (!from.name || !to.name) return;
 
-    if (to.name === 'index') {
-        window.location.reload();
-    }
+    if (from.name === 'index') return;
+
+    if (to.name === 'index') window.location.reload();
 });
 
 export default router;

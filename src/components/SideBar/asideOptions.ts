@@ -1,5 +1,8 @@
 import type { MenuOption } from 'naive-ui';
 
+import { h } from 'vue';
+import { RouterLink } from 'vue-router';
+
 const SheetFunctions = [
     {
         label: '常用函数',
@@ -1976,8 +1979,6 @@ const FileTypeChange = [
         key: 'ecw',
     },
 ];
-import { RouterLink } from 'vue-router';
-import { h } from 'vue';
 
 const DataVisualizationType = [
     { label: '折线图', key: 'line' },
@@ -2008,14 +2009,16 @@ const asideOptions: MenuOption[] = [
             h(
                 RouterLink,
                 {
-                    to: {
-                        name: 'index',
-                        params: {
-                            lang: 'zh-CN',
-                        },
+                    to: '/index', // 改成你想跳转的路径
+                    onClick: (e: Event) => {
+                        const isIndex = window.location.pathname === '/index';
+                        if (isIndex) {
+                            e.preventDefault();
+                            return;
+                        }
                     },
                 },
-                { default: () => '数据分析' }
+                () => '数据分析主页'
             ),
         key: 'go-home',
     },
