@@ -1,10 +1,10 @@
 <template>
-    <div class="w-full min-h-full bg-[#f5f7fa] p-6 font-sans box-border relative">
-        <div class="text-xl font-bold bg-white rounded-lg p-4 mb-6">文件格式标准化</div>
+    <div class="w-full min-h-full bg-[#f5f7fa] p-6 font-sans box-border flex flex-col h-full gap-2">
+        <div class="text-xl font-bold bg-white rounded-lg p-4 mb-3">文件格式标准化</div>
 
-        <div class="w-full">
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <div class="text-base font-bold border-b border-gray-200 pb-3 mb-5">
+        <div class="w-full h-4/5">
+            <div class="bg-white rounded-lg shadow-sm p-6 flex flex-col">
+                <div class="text-base font-bold border-b border-gray-200 pb-5">
                     文件格式标准化处理
                 </div>
                 <n-upload
@@ -15,7 +15,7 @@
                     accept=".xlsx"
                     :on-change="handleUploadChange"
                     :auto-upload="false"
-                    class="upload-custom [&_.n-upload-file-list]:max-h-66 [&_.n-upload-file-list]:overflow-scroll [&_.n-upload-file-list::-webkit-scrollbar]:w-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:rounded-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:bg-black/30"
+                    class="upload-custom flex-1 flex flex-col [&_.n-upload-file-list]:max-h-66 [&_.n-upload-file-list]:overflow-scroll [&_.n-upload-file-list::-webkit-scrollbar]:w-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:rounded-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:bg-black/30"
                 >
                     <n-upload-dragger
                         class="bg-blue-50 !border-2 border-dashed border-blue-300 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 rounded-lg py-6"
@@ -35,7 +35,7 @@
                         </n-p>
                     </n-upload-dragger>
                 </n-upload>
-                <div class="flex gap-3 flex-wrap mt-5">
+                <div class="flex gap-3 flex-wrap">
                     <n-button type="info" :disabled="!files.length" @click="openPreview">
                         预览原始数据
                     </n-button>
@@ -53,7 +53,7 @@
                         :extracted-fields="extractedFields"
                     />
                 </div>
-                <div v-if="processing || done" class="text-sm font-medium my-4">处理进度</div>
+                <div v-if="processing || done" class="text-sm font-medium my-5">处理进度</div>
                 <n-progress
                     v-if="processing || done"
                     type="line"
