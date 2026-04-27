@@ -35,6 +35,7 @@ declare module 'vue' {
     Header: typeof import('./src/components/Header/Header.vue')['default']
     HeaderArea: typeof import('./src/components/Header/HeaderArea.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    MergeDataTable: typeof import('./src/components/fileMerge/MergeDataTable.vue')['default']
     MergeExcel: typeof import('./src/components/fileMerge/MergeExcel.vue')['default']
     MergeUploadBox: typeof import('./src/components/fileMerge/MergeUploadBox.vue')['default']
     MessageArea: typeof import('./src/components/AssistantChat/MessageArea.vue')['default']
