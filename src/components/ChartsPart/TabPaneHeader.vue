@@ -13,10 +13,16 @@
                         <ArrowBack />
                     </n-icon>
                 </template>
-                返回分析
+                返回分析主页
             </n-button>
 
-            <n-button type="error" @click="exportPDF('.capture-container')"> 生成 PDF </n-button>
+            <div class="flex gap-4">
+                <n-button type="error" @click="exportPDF('.capture-container')">
+                    生成 PDF
+                </n-button>
+
+                <n-button type="info" @click="exportPNG('.capture-container')"> 生成 PNG </n-button>
+            </div>
         </div>
         <n-divider />
     </div>
@@ -26,7 +32,7 @@
 import { ArrowBack } from '@vicons/ionicons5';
 
 import { useRouter } from 'vue-router';
-import { exportPDF } from '@/utils/saveDOM';
+import { exportPDF, exportPNG } from '@/utils/saveDOM';
 
 const router = useRouter();
 </script>
