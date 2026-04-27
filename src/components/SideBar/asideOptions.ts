@@ -2063,7 +2063,7 @@ const asideOptions: MenuOption[] = [
         children: FileTypeChange,
     },
     {
-        label: '表格函数',
+        label: '表格函数参考',
         key: 'sheet-functions',
         children: SheetFunctions,
     },
