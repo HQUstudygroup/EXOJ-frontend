@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAiAssistantStore } from '@/stores/AiAssistant';
+import { useAiAssistantStore } from '@/stores/aiAssistant';
 
 const AiAssistantStore = useAiAssistantStore();
 

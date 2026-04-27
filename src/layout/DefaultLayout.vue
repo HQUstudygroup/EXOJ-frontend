@@ -24,12 +24,13 @@
     <!-- 弹窗组件 -->
     <FunctionModal></FunctionModal>
     <AssistantModal></AssistantModal>
-    <flowbutton></flowbutton>
+    <flowButton></flowButton>
 </template>
 
 <script setup lang="ts">
 import AssistantModal from '@/components/AssistantChat/AssistantModal.vue';
 import FunctionModal from '@/components/SideBar/FunctionModal.vue';
+import flowButton from '@/components/FloatingBallButton/flowButton.vue';
 import HeaderArea from '@/components/Header/HeaderArea.vue';
 import AsideArea from '@/components/SideBar/AsideArea.vue';
 

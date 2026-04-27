@@ -31,9 +31,9 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
-import { useAiAssistantStore } from '@/stores/AiAssistant';
+import { useAiAssistantStore } from '@/stores/aiAssistant';
 
 import { computed } from 'vue';
 
@@ -43,8 +43,8 @@ const isRightSide = computed(() => {
 
 const aiAssistantStore = useAiAssistantStore();
 
-const x = ref(300);
-const y = ref(300);
+const x = ref(290);
+const y = ref(70);
 
 let offsetX = 0;
 let offsetY = 0;
@@ -55,7 +55,7 @@ let moved = false;
 
 const dragging = ref(false);
 
-const startDrag = (e) => {
+const startDrag = (e: any) => {
     dragging.value = true;
 
     startX = e.clientX;
@@ -79,7 +79,7 @@ const stopDrag = () => {
         aiAssistantStore.showAssistantModal = !aiAssistantStore.showAssistantModal;
     }
 };
-const onMove = (e) => {
+const onMove = (e: any) => {
     if (!dragging.value) return;
 
     if (Math.abs(e.clientX - startX) > 3 || Math.abs(e.clientY - startY) > 3) {
@@ -109,6 +109,7 @@ const messages = [
 
 const randomMsg = () => messages[Math.floor(Math.random() * messages.length)];
 const tipText = ref(randomMsg());
+
 setInterval(() => {
     tipText.value = randomMsg();
 }, 4000);

@@ -52,11 +52,6 @@ const routes = [
         name: 'NotFound',
         component: () => import('@/views/NotFoundView.vue'),
     },
-    {
-        name: 'formatStandard',
-        path: '/formatStandard',
-        component: () => import('@/views/formatStandardizationView.vue'),
-    },
 ];
 
 // 创建路由实例

@@ -51,7 +51,7 @@ import { useRouter } from 'vue-router';
 import { Sparkles } from '@vicons/ionicons5';
 
 import { useUniverStore } from '@/stores/univer';
-import { useAiAssistantStore } from '@/stores/AiAssistant';
+import { useAiAssistantStore } from '@/stores/aiAssistant';
 
 const router = useRouter();
 

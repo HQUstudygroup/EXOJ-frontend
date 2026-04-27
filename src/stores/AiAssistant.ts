@@ -25,7 +25,7 @@ import { nextTick } from 'vue';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
-export const useAiAssistantStore = defineStore('askassistant', {
+export const useAiAssistantStore = defineStore('aiassistant', {
     state: () => ({
         /** @type {{role: string, content: string, messageStatus: boolean | 'error'}[]} 消息列表，用于 UI 渲染 */
         messages: [] as {
