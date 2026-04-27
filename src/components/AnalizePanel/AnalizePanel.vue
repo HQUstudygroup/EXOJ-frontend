@@ -25,19 +25,29 @@
             class="box-border h-full p-3"
         >
         </n-transfer>
+
+        <AnalizeModal></AnalizeModal>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ArrowForwardOutline } from '@vicons/ionicons5';
 import { ref } from 'vue';
+
+import type { ChartUIKey } from '@/models/chartTypes';
+import { CHART_PARAM_SCHEMA } from '@/services/chart/schema';
 
 import { useUniverStore } from '@/stores/univer';
 import { useMenuStore } from '@/stores/menu';
+import { useChartModalStore } from '@/stores/chartModal';
 import { logger } from '@/utils/logger';
+
+import AnalizeModal from './AnalizeModal.vue';
+import { ArrowForwardOutline } from '@vicons/ionicons5';
 
 const menuStore = useMenuStore();
 const univerStore = useUniverStore();
+const chartModalStore = useChartModalStore();
+
 const transferValue = ref();
 
 async function goAnalyze() {
@@ -50,6 +60,13 @@ async function goAnalyze() {
         logger.error('还没选择数据可视化类别');
         return;
     }
+
+    const requiredParam = CHART_PARAM_SCHEMA[menuStore.activeKey as ChartUIKey].required;
+    const optionalParam = CHART_PARAM_SCHEMA[menuStore.activeKey as ChartUIKey].optional;
+
+    chartModalStore.open(requiredParam, optionalParam);
+
+    chartModalStore.setSelectOptions(transferValue.value);
 }
 </script>
 
