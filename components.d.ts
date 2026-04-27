@@ -28,7 +28,7 @@ declare module 'vue' {
     FilterHeaderExtra: typeof import('./src/components/FilterModal/FilterHeaderExtra.vue')['default']
     FilterModal: typeof import('./src/components/FilterModal/FilterModal.vue')['default']
     Flow_button: typeof import('./src/components/FloatingBallButton/flow_button.vue')['default']
-    Flowbutton: typeof import('./src/components/FloatingBallButton/flowButton.vue')['default']
+    Flowbutton: typeof import('./src/components/FloatingBallButton/flowbutton.vue')['default']
     FlowButton: typeof import('./src/components/FloatingBallButton/flowButton.vue')['default']
     FunctionModal: typeof import('./src/components/SideBar/FunctionModal.vue')['default']
     'FunctionModal.vue': typeof import('./src/components/SideBar/FunctionModal.vue.vue')['default']

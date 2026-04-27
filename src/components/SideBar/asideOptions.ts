@@ -2042,7 +2042,19 @@ const asideOptions: MenuOption[] = [
         key: 'merge-files',
     },
     {
-        label: '文件格式标准化',
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: 'extry',
+                        params: {
+                            lang: 'zh-CN',
+                        },
+                    },
+                },
+                { default: () => '文件格式标准化' }
+            ),
         key: 'unify-formats',
     },
     {

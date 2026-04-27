@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useAiAssistantStore } from '@/stores/aiAssistant';
+import { useAiAssistantStore } from '@/stores/AiAssistant';
 import { useRoute } from 'vue-router';
 const route = useRoute();
 

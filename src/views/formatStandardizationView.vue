@@ -31,7 +31,7 @@
                         </n-text>
 
                         <n-p depth="4" class="mt-1 text-xs text-gray-400 text-center">
-                            请保证每个文件表头一致，否则标准化可能会有错误
+                            请保证每个文件表头一致，否则标准化可能会有错误(目前仅支持.xlsx格式)
                         </n-p>
                     </n-upload-dragger>
                 </n-upload>
@@ -94,7 +94,7 @@
                                     v-for="(cell, cIdx) in (originalDataList[previewFileIndex] ||
                                         [])[0]"
                                     :key="cIdx"
-                                    class="bg-blue-50 border border-gray-200 p-3 whitespace-nowrap font-medium text-gray-700"
+                                    class="bg-blue-50 border border-gray-200 p-3 whitespace-nowrap font-medium text-gray-700 text-center"
                                 >
                                     {{ cell }}
                                 </th>
@@ -111,9 +111,9 @@
                                 <td
                                     v-for="(cell, cIdx) in row"
                                     :key="cIdx"
-                                    class="border border-gray-200 p-3 whitespace-nowrap hover:bg-gray-50 transition-colors"
+                                    class="border border-gray-200 p-3 whitespace-nowrap hover:bg-gray-50 transition-colors text-center"
                                 >
-                                    {{ cell ?? '-' }}
+                                    {{ formatPreviewCell(cell) || '-' }}
                                 </td>
                             </tr>
                         </tbody>
@@ -154,7 +154,7 @@
                                                 <th
                                                     v-for="(cell, cIdx) in previewHead"
                                                     :key="cIdx"
-                                                    class="bg-blue-50 border border-gray-200 p-3 whitespace-nowrap"
+                                                    class="bg-blue-50 border border-gray-200 p-3 whitespace-nowrap font-medium text-gray-700 text-center"
                                                 >
                                                     {{ cell }}
                                                 </th>
@@ -166,9 +166,9 @@
                                                 <td
                                                     v-for="(cell, cIdx) in row"
                                                     :key="cIdx"
-                                                    class="border border-gray-200 p-3 whitespace-nowrap"
+                                                    class="border border-gray-200 p-3 whitespace-nowrap hover:bg-gray-50 transition-colors text-center"
                                                 >
-                                                    {{ cell ?? '-' }}
+                                                    {{ formatPreviewCell(cell) || '-' }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -191,62 +191,90 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 import * as XLSX from 'xlsx';
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5';
 import ExcelJS from 'exceljs';
+import ConfigurationPanel from '@/components/DocumentStandardization/ConfigurationPanel.vue';
+
+// 列配置类型定义
+export interface ColumnConfig {
+    field: string;
+    type: 'string' | 'number' | 'money' | 'date' | 'boolean';
+    fontFamily: string;
+    fontSize: number;
+    numType: 'int' | 'decimal' | 'percent';
+    decimalDigits: number;
+    cleanMoneyUnit: boolean;
+    moneyFormat?: 'lower' | 'upper';
+    rule: string;
+}
+
+// 处理后文件类型
+interface ProcessedFile {
+    name: string;
+    data: any[][];
+}
+
+// Naive UI Upload 类型
+interface UploadFileInfo {
+    file?: File;
+    [key: string]: any;
+}
 
 const showTemplateModal = ref(false);
-const fileList = ref([]);
-const files = ref([]);
-const fileNames = ref([]);
+const fileList = ref<UploadFileInfo[]>([]);
+const files = ref<File[]>([]);
+const fileNames = ref<string[]>([]);
 
-const extractedFields = ref([]);
+const extractedFields = ref<string[]>([]);
 
 const processing = ref(false);
 const progress = ref(0);
 const done = ref(false);
 const errMsg = ref('');
 
-const processedFiles = ref([]);
+const processedFiles = ref<ProcessedFile[]>([]);
 
 const showPreview = ref(false);
 const showHistoryModal = ref(false);
 const showFilePreviewModal = ref(false);
 
-const previewHead = ref([]);
-const previewBody = ref([]);
+const previewHead = ref<string[]>([]);
+const previewBody = ref<any[][]>([]);
 
-const templateLocked = ref(false); //
-const originalDataList = ref([]); //
-const previewFileIndex = ref(0); //
+const templateLocked = ref(false);
+const originalDataList = ref<any[][]>([]);
+const previewFileIndex = ref(0);
 
-const columns = ref([
+const columns = ref<ColumnConfig[]>([
     {
-        field: '',
+        field: null as any,
         type: 'string',
         fontFamily: '微软雅黑',
         fontSize: 12,
         numType: 'int',
         decimalDigits: 2,
         cleanMoneyUnit: true,
-        moneyFormat: 'lower',
+        moneyFormat: 'upper',
         rule: 'YYYY-MM-DD',
     },
 ]);
 
-const cleanHeader = (h) =>
+const cleanHeader = (h: any): string =>
     String(h || '')
         .trim()
         .replace(/\s+/g, '');
 
-const canProcess = computed(() => files.value.length && columns.value.some((c) => c.field));
+const canProcess = computed(() => {
+    return files.value.length > 0 && columns.value.some((c) => c.field);
+});
 
-const handleUploadChange = async ({ fileList: fl }) => {
+const handleUploadChange = async ({ fileList: fl }: { fileList: UploadFileInfo[] }) => {
     fileList.value = fl;
 
-    const rawFiles = fl.map((f) => f.file).filter(Boolean);
+    const rawFiles = fl.map((f) => f.file).filter(Boolean) as File[];
     files.value = rawFiles;
     fileNames.value = rawFiles.map((f) => f.name);
 
@@ -265,41 +293,22 @@ const handleUploadChange = async ({ fileList: fl }) => {
     errMsg.value = '';
 };
 
-const readExcelHeaders = (file) => {
+const readExcel = (file: File): Promise<any[][]> => {
     return new Promise((resolve) => {
         const r = new FileReader();
 
         r.onload = (e) => {
-            const wb = XLSX.read(e.target.result, { type: 'array' });
+            const wb = XLSX.read(e.target?.result, { type: 'array' });
             const ws = wb.Sheets[wb.SheetNames[0]];
             const arr = XLSX.utils.sheet_to_json(ws, { header: 1 });
-
-            originalData.value = arr;
-
-            const headers = (arr[0] || []).map(cleanHeader);
-            resolve(headers);
+            resolve(arr as any[][]);
         };
 
         r.readAsArrayBuffer(file);
     });
 };
 
-const readExcel = (file) => {
-    return new Promise((resolve) => {
-        const r = new FileReader();
-
-        r.onload = (e) => {
-            const wb = XLSX.read(e.target.result, { type: 'array' });
-            const ws = wb.Sheets[wb.SheetNames[0]];
-            const arr = XLSX.utils.sheet_to_json(ws, { header: 1 });
-            resolve(arr);
-        };
-
-        r.readAsArrayBuffer(file);
-    });
-};
-
-const numberToChineseUpper = (num) => {
+const numberToChineseUpper = (num: number): string => {
     if (isNaN(num) || num === 0) return '零元整';
 
     const digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
@@ -324,7 +333,7 @@ const numberToChineseUpper = (num) => {
     return num < 0 ? `负${r}` : r;
 };
 
-const formatCell = (val, col) => {
+const formatCell = (val: any, col: ColumnConfig): any => {
     if (val == null || val === '') return '';
 
     let v = String(val).trim();
@@ -334,7 +343,7 @@ const formatCell = (val, col) => {
     if (col.type === 'number') {
         const n = +v.replace(/[^\d.-]/g, '') || 0;
 
-        if (col.numType === 'int') return parseInt(n);
+        if (col.numType === 'int') return parseInt(n.toString());
         if (col.numType === 'decimal') return n.toFixed(col.decimalDigits);
         if (col.numType === 'percent') return (n * 100).toFixed(col.decimalDigits) + '%';
     }
@@ -348,7 +357,7 @@ const formatCell = (val, col) => {
 
     if (col.type === 'date') {
         const d = new Date(v.replace(/\./g, '-'));
-        if (isNaN(d)) return v;
+        if (isNaN(d.getTime())) return v;
 
         const y = d.getFullYear();
         const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -384,12 +393,12 @@ const startProcess = async () => {
 
         const headers = (data[0] || []).map(cleanHeader);
 
-        const headerIndexMap = new Map();
+        const headerIndexMap = new Map<string, number>();
         headers.forEach((h, i) => {
             headerIndexMap.set(h, i);
         });
 
-        const newData = JSON.parse(JSON.stringify(data));
+        const newData = JSON.parse(JSON.stringify(data)) as any[][];
 
         for (let row = 1; row < newData.length; row++) {
             const r = newData[row];
@@ -425,18 +434,21 @@ const startProcess = async () => {
 };
 
 const openPreview = () => {
-    previewFileIndex.value = 0; // 重置
+    previewFileIndex.value = 0;
     showPreview.value = true;
 };
-const openHistoryModal = () => (showHistoryModal.value = true);
 
-const previewProcessed = (item) => {
+const openHistoryModal = () => {
+    showHistoryModal.value = true;
+};
+
+const previewProcessed = (item: ProcessedFile) => {
     previewHead.value = item.data[0] || [];
     previewBody.value = item.data.slice(1) || [];
     showFilePreviewModal.value = true;
 };
 
-const exportSingleFile = async (item) => {
+const exportSingleFile = async (item: ProcessedFile) => {
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet('标准化结果');
 
@@ -462,7 +474,10 @@ const exportSingleFile = async (item) => {
         const r = sheet.addRow(row);
 
         r.eachCell((cell, colNumber) => {
-            const colConfig = columns.value[colNumber - 1];
+            const headerName = headers[colNumber - 1];
+            const colConfig = columns.value.find(
+                (c) => cleanHeader(c.field) === cleanHeader(headerName)
+            );
             if (!colConfig) return;
 
             if (colConfig.type === 'string') {
@@ -504,5 +519,29 @@ const exportSingleFile = async (item) => {
     link.href = URL.createObjectURL(blob);
     link.download = item.name;
     link.click();
+};
+const excelDateToJSDate = (num: number) => {
+    const base = new Date(1899, 11, 30);
+    return new Date(base.getTime() + num * 86400000);
+};
+const formatPreviewCell = (val: any) => {
+    if (val == null || val === '') return '';
+
+    const num = Number(val);
+    if (!isNaN(num)) {
+        if (num > 30000 && num < 60000) {
+            const d = excelDateToJSDate(num);
+
+            if (!isNaN(d.getTime())) {
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                const d2 = String(d.getDate()).padStart(2, '0');
+
+                return `${y}-${m}-${d2}`;
+            }
+        }
+    }
+
+    return val;
 };
 </script>
