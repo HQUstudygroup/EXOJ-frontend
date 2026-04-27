@@ -10,7 +10,7 @@
         class="upload-custom [&_.n-upload-file-list]:max-h-35 [&_.n-upload-file-list]:overflow-scroll [&_.n-upload-file-list::-webkit-scrollbar]:w-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:rounded-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:bg-black/30"
     >
         <n-upload-dragger
-            class="bg-blue-50 border-2 border-dashed border-blue-300 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 rounded-lg py-6"
+            class="bg-blue-50 !border-2 border-dashed border-blue-300 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 rounded-lg py-6"
         >
             <div class="mb-3 flex justify-center">
                 <n-icon size="48" :depth="3">

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full min-h-screen bg-[#f5f7fa] p-6 font-sans box-border relative">
+    <div class="w-full min-h-full bg-[#f5f7fa] p-6 font-sans box-border relative">
         <div class="text-xl font-bold bg-white rounded-lg p-4 mb-6">文件格式标准化</div>
 
         <div class="w-full">
@@ -15,10 +15,10 @@
                     accept=".xlsx"
                     :on-change="handleUploadChange"
                     :auto-upload="false"
-                    class="upload-custom [&_.n-upload-file-list]:max-h-80px [&_.n-upload-file-list]:overflow-y-auto [&_.n-upload-file-list::-webkit-scrollbar]:w-0 hover:[&_.n-upload-file-list::-webkit-scrollbar]:w-4px hover:[&_.n-upload-file-list::-webkit-scrollbar-thumb]:bg-black/30 hover:[&_.n-upload-file-list::-webkit-scrollbar-thumb]:rounded-4px"
+                    class="upload-custom [&_.n-upload-file-list]:max-h-66 [&_.n-upload-file-list]:overflow-scroll [&_.n-upload-file-list::-webkit-scrollbar]:w-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:rounded-5px [&_.n-upload-file-list::-webkit-scrollbar-thumb]:bg-black/30"
                 >
                     <n-upload-dragger
-                        class="bg-blue-50 border-2 border-dashed border-blue-300 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 rounded-lg py-6"
+                        class="bg-blue-50 !border-2 border-dashed border-blue-300 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 rounded-lg py-6"
                     >
                         <div class="mb-3 flex justify-center">
                             <n-icon size="48" :depth="3">
