@@ -3,7 +3,6 @@
         <n-modal
             v-model:show="aiAssistantStore.showAssistantModal"
             :show-mask="false"
-            closable
             content-scrollable
             :segmented="{ content: true, footer: true }"
             title="AI 助手"
@@ -25,7 +24,7 @@
 
 <script setup lang="ts">
 import MessageInputBox from '@/components/AssistantChat/MessageInputBox.vue';
-import { useAiAssistantStore } from '@/stores/aiAssistant';
+import { useAiAssistantStore } from '@/stores/AiAssistant';
 import MessageArea from './MessageArea.vue';
 
 const aiAssistantStore = useAiAssistantStore();

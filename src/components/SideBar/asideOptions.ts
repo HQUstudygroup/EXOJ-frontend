@@ -1976,6 +1976,8 @@ const FileTypeChange = [
         key: 'ecw',
     },
 ];
+import { RouterLink } from 'vue-router';
+import { h } from 'vue';
 
 const DataVisualizationType = [
     { label: '折线图', key: 'line' },
@@ -2002,13 +2004,41 @@ const DataVisualizationType = [
 
 const asideOptions: MenuOption[] = [
     {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: 'index',
+                        params: {
+                            lang: 'zh-CN',
+                        },
+                    },
+                },
+                { default: () => '数据分析' }
+            ),
+        key: 'go-home',
+    },
+    {
         label: '数据可视化',
         key: 'data-visualization',
         children: DataVisualizationType,
     },
 
     {
-        label: '多文件合并',
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: 'merge-files',
+                        params: {
+                            lang: 'zh-CN',
+                        },
+                    },
+                },
+                { default: () => '多文件合并' }
+            ),
         key: 'merge-files',
     },
     {

@@ -20,6 +20,16 @@ const routes = [
                 path: 'analyze-page',
                 component: () => import('@/views/AnalizeView.vue'),
             },
+            {
+                name: 'extry',
+                path: 'extry',
+                component: () => import('@/views/formatStandardizationView.vue'),
+            },
+            {
+                name: 'merge-files',
+                path: 'merge-files',
+                component: () => import('@/views/MergeFilesView.vue'),
+            },
         ],
     },
     {
@@ -41,6 +51,11 @@ const routes = [
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('@/views/NotFoundView.vue'),
+    },
+    {
+        name: 'formatStandard',
+        path: '/formatStandard',
+        component: () => import('@/views/formatStandardizationView.vue'),
     },
 ];
 
