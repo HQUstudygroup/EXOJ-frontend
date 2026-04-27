@@ -24,6 +24,8 @@ export const useUniverStore = defineStore('univer', {
         }[],
 
         transferOptions: [] as { label: string; value: string }[],
+
+        transferValues: [] as string[],
     }),
 
     actions: {
@@ -114,8 +116,6 @@ export const useUniverStore = defineStore('univer', {
                         value: `${sheetName} ─ ${item}`,
                     }))
             );
-
-            console.log(this.transferOptions);
         },
 
         async getFormulaInfo(formulaName: string) {

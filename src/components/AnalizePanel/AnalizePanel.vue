@@ -17,7 +17,7 @@
         </n-button>
 
         <n-transfer
-            v-model:value="transferValue"
+            v-model:value="univerStore.transferValues"
             :options="univerStore.transferOptions"
             virtual-scroll
             source-filterable
@@ -31,8 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import type { ChartUIKey } from '@/models/chartTypes';
 import { CHART_PARAM_SCHEMA } from '@/services/chart/schema';
 
@@ -48,10 +46,8 @@ const menuStore = useMenuStore();
 const univerStore = useUniverStore();
 const chartModalStore = useChartModalStore();
 
-const transferValue = ref();
-
 async function goAnalyze() {
-    if (!transferValue.value) {
+    if (!univerStore.transferValues.length) {
         logger.error('似乎没有选择任何字段进行分析');
         return;
     }
@@ -66,7 +62,7 @@ async function goAnalyze() {
 
     chartModalStore.open(requiredParam, optionalParam);
 
-    chartModalStore.setSelectOptions(transferValue.value);
+    chartModalStore.setSelectOptions(univerStore.transferValues);
 }
 </script>
 

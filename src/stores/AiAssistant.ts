@@ -3,6 +3,8 @@ import { chatAPI } from '@/api/chat';
 import { defineStore } from 'pinia';
 import { nextTick } from 'vue';
 
+import { useUniverStore } from './univer';
+
 /**
  * AiAssistantStore
  *
@@ -24,6 +26,7 @@ import { nextTick } from 'vue';
  */
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
+const univerStore = useUniverStore();
 
 export const useAiAssistantStore = defineStore('aiassistant', {
     state: () => ({
@@ -87,7 +90,7 @@ export const useAiAssistantStore = defineStore('aiassistant', {
          * @param {string} prompt - 用户输入的提示词
          * @returns {Promise<void>}
          */
-        async requestAssistant(prompt: string, scene: string, analyzeData?: []) {
+        async requestAssistant(prompt: string, scene: string) {
             const id = this.taskId;
 
             let session_id = localStorage.getItem('session_id');
@@ -109,9 +112,14 @@ export const useAiAssistantStore = defineStore('aiassistant', {
             try {
                 if (id !== this.taskId) return;
 
-                if (scene === 'analyze') {
-                    prompt;
+                if (scene !== 'default') {
+                    const dataPrompt = await univerStore.getDataFromCols(
+                        univerStore.transferValues
+                    );
+
+                    prompt = `${JSON.stringify(dataPrompt)} \n\n\n ${prompt}`;
                 }
+
                 const response = await chatAPI({
                     baseURL,
                     session_id,
