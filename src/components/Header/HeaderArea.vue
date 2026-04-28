@@ -23,7 +23,12 @@
                 查看分析结果
             </n-button>
 
-            <n-upload multiple :show-file-list="false" @change="handleFileChange">
+            <n-upload
+                multiple
+                :show-file-list="false"
+                @change="handleFileChange"
+                accept=".xls,.xlsx,.csv"
+            >
                 <n-button strong round :focusable="false" type="info"> 上传数据 </n-button>
             </n-upload>
 
@@ -63,7 +68,7 @@ const handleFileChange = async (options: any) => {
 
     if (!file) return;
 
-    await univerStore.importExcel(file);
+    await univerStore.importDataToUnitable(file);
 };
 </script>
 
