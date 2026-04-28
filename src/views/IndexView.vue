@@ -7,7 +7,6 @@
             pane2-class="p-5 h-full box-border"
             :default-size="0.35"
             :max="0.6"
-            :min="0.3"
         >
             <template #1>
                 <n-split

@@ -12,14 +12,18 @@
         <div v-if="!univerStore.sheetsInfo.length" class="h-full flex justify-center items-center">
             <n-empty description="暂无分析数据">
                 <template #extra>
-                    <n-upload :show-file-list="false" @change="handleFileChange">
+                    <n-upload
+                        :show-file-list="false"
+                        @change="handleFileChange"
+                        accept=".xls,.xlsx,.csv"
+                    >
                         <n-button size="small" type="primary"> 去分析 </n-button>
                     </n-upload>
                 </template>
             </n-empty>
         </div>
 
-        <n-tabs v-if="univerStore.sheetsInfo.length" animated>
+        <n-tabs v-if="univerStore.sheetsInfo.length" animated v-model:value="activeTab">
             <n-tab-pane
                 v-for="sheet in univerStore.sheetsInfo"
                 :key="sheet.id"
@@ -53,15 +57,28 @@
 <script setup lang="ts">
 import { useUniverStore } from '@/stores/univer';
 import { ListSharp } from '@vicons/ionicons5';
+import { watch, ref } from 'vue';
+import { storeToRefs } from 'pinia';
 
 const univerStore = useUniverStore();
+
+const activeTab = ref();
+const { sheetsInfo } = storeToRefs(univerStore);
+
+watch(
+    sheetsInfo,
+    () => {
+        activeTab.value = sheetsInfo.value.at(-1)?.id;
+    },
+    { immediate: true }
+);
 
 const handleFileChange = async (options: any) => {
     const file = options.file?.file || options.file;
 
     if (!file) return;
 
-    await univerStore.importExcel(file);
+    await univerStore.importDataToUnitable(file);
 };
 </script>
 
