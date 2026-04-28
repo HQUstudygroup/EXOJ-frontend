@@ -66,7 +66,7 @@ const activeTab = ref();
 const { sheetsInfo } = storeToRefs(univerStore);
 
 watch(
-    sheetsInfo,
+    () => sheetsInfo.value.at(-1)?.id,
     () => {
         activeTab.value = sheetsInfo.value.at(-1)?.id;
     },
