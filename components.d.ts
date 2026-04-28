@@ -93,6 +93,7 @@ declare module 'vue' {
     NSpin: typeof import('naive-ui')['NSpin']
     NSplit: typeof import('naive-ui')['NSplit']
     NStatistic: typeof import('naive-ui')['NStatistic']
+    NSwitch: typeof import('naive-ui')['NSwitch']
     NTable: typeof import('naive-ui')['NTable']
     NTabPane: typeof import('naive-ui')['NTabPane']
     NTabs: typeof import('naive-ui')['NTabs']
@@ -115,6 +116,7 @@ declare module 'vue' {
     TChatSender: typeof import('@tdesign-vue-next/chat')['ChatSender']
     TSpace: typeof import('tdesign-vue')['Space']
     UniTable: typeof import('./src/components/UniTable/UniTable.vue')['default']
+    UniTableExtra: typeof import('./src/components/UniTable/UniTableExtra.vue')['default']
     Upload: typeof import('./src/components/file_merge/MergeUploadBox.vue')['default']
   }
 }

@@ -1,7 +1,6 @@
 import { type FUniver } from '@univerjs/presets';
 import { type FWorkbook } from '@univerjs/preset-sheets-core';
 
-import { readXlsx } from '@/utils/xlsxUtil';
 import debounce from '@/utils/debounce';
 
 import { defineStore } from 'pinia';
@@ -29,6 +28,8 @@ export const useUniverStore = defineStore('univer', {
         transferValues: [] as string[],
 
         commandListenerDisposable: null as any,
+
+        replace: false as boolean,
     }),
 
     actions: {
@@ -126,14 +127,14 @@ export const useUniverStore = defineStore('univer', {
             return newName;
         },
 
-        async importDataToUnitable(file: File, replace?: boolean) {
+        async importDataToUnitable(file: File) {
             if (!this.univerAPI || !this.workbook) {
                 throw new Error('univerAPI 实例不存在');
             }
 
             const workbookData = await importUnitable(file);
 
-            if (replace) {
+            if (this.replace) {
                 this.univerAPI.dispose();
                 this.univerAPI?.createWorkbook(workbookData);
 

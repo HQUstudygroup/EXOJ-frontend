@@ -1,11 +1,14 @@
 <template>
-    <div
-        :class="[
-            'shadow-[0_4px_16px_rgba(0,0,0,0.5)]',
-            contentClass ? contentClass : 'h-200 w-350',
-        ]"
-        ref="container"
-    />
+    <div class="h-full relative">
+        <uni-table-extra></uni-table-extra>
+        <div
+            :class="[
+                'shadow-[0_4px_16px_rgba(0,0,0,0.5)]',
+                contentClass ? contentClass : 'h-200 w-350',
+            ]"
+            ref="container"
+        />
+    </div>
 </template>
 
 <script lang="ts" setup>
