@@ -6,12 +6,13 @@ import debounce from '@/utils/debounce';
 
 import { defineStore } from 'pinia';
 import { markRaw } from 'vue';
+import { importUnitable } from '@/utils/uniTableIO';
 
 export const useUniverStore = defineStore('univer', {
     state: () => ({
         univerAPI: null as FUniver | null,
         workbook: null as FWorkbook | null,
-        formulaService: null as any,
+        formulaDescriptions: null as any,
 
         reRenderStates: null as any,
 
@@ -37,14 +38,11 @@ export const useUniverStore = defineStore('univer', {
             (window as any).univerAPI = this.univerAPI;
             this.workbook = markRaw(this.univerAPI.getActiveWorkbook() as FWorkbook) as FWorkbook;
 
-            this.formulaService = this.univerAPI.getFormula()['_functionService'];
-
             this.initCommandListener();
         },
 
         clearCommandListener() {
             if (this.commandListenerDisposable) {
-                // 如果 onCommandExecuted 返回了 disposable 对象
                 if (typeof this.commandListenerDisposable.dispose === 'function') {
                     this.commandListenerDisposable.dispose();
                 }
@@ -80,11 +78,12 @@ export const useUniverStore = defineStore('univer', {
                 });
             }, 200);
 
-            this.commandListenerDisposable = this.workbook.onCommandExecuted((command: any) => {
-                if (command.id.startsWith('sheet.mutation.')) {
-                    this.reRenderStates();
-                }
+            this.commandListenerDisposable = this.workbook?.onCommandExecuted((command: any) => {
+                if (command.id.startsWith('sheet.mutation.')) this.reRenderStates();
+                if (command.id === 'sheet.operation.set-worksheet-active') '';
             });
+
+            this.reRenderStates();
         },
 
         filterData(dataList: any[][], filterOutDataList: number[]) {
@@ -127,30 +126,71 @@ export const useUniverStore = defineStore('univer', {
             return newName;
         },
 
-        async importExcel(file: File) {
-            if (!this.univerAPI || !this.workbook) return;
-
-            const data = await readXlsx(file);
-
-            let sheet = this.workbook.getActiveSheet();
-            if (!sheet) return;
-
-            const value = sheet.getRange(0, 0, 1, 1).getValue?.();
-            const isEmpty = value == null || value === '';
-
-            if (!isEmpty) {
-                sheet = this.workbook.insertSheet();
+        async importDataToUnitable(file: File, replace?: boolean) {
+            if (!this.univerAPI || !this.workbook) {
+                throw new Error('univerAPI 实例不存在');
             }
 
-            sheet.getRange(0, 0, data.length, data[0].length).setValues(data);
+            const workbookData = await importUnitable(file);
 
-            const sheetName = file.name.replace(/\.[^/.]+$/, '');
-            const sheetNames = this.workbook.getSheets().map((sheet) => sheet.getSheetName());
+            if (replace) {
+                this.univerAPI.dispose();
+                this.univerAPI?.createWorkbook(workbookData);
 
-            const uniqueSheetName = this.getUniqueSheetName(sheetName, sheetNames);
-            sheet.setName(uniqueSheetName);
+                this.workbook = markRaw(
+                    this.univerAPI.getActiveWorkbook() as FWorkbook
+                ) as FWorkbook;
 
-            this.workbook.setActiveSheet(sheet);
+                this.initCommandListener();
+            } else {
+                const randomId = `${Date.now()}_${Math.random().toString(36).substr(2, 8)}`;
+
+                const dataRefactor = (data: any, randomId: string) => {
+                    return JSON.parse(
+                        JSON.stringify(data)
+                            .replace(/(sheet-\d+)/g, `$1${randomId}`)
+                            .replace(/(style_\d+)/g, `$1${randomId}`)
+                    );
+                };
+
+                const currentData = this.workbook.save();
+
+                const mergedData = {
+                    ...currentData,
+                    id: `${currentData.id}_${new Date().getTime().toString()}`,
+                    sheets: {
+                        ...currentData.sheets,
+                        ...dataRefactor(workbookData.sheets, randomId),
+                    },
+                    sheetOrder: [
+                        ...currentData.sheetOrder,
+                        ...dataRefactor(workbookData.sheetOrder, randomId),
+                    ],
+                    styles: {
+                        ...currentData.styles,
+                        ...dataRefactor(workbookData.styles, randomId),
+                    },
+                };
+
+                this.univerAPI.dispose();
+                this.workbook.dispose();
+                this.clearCommandListener();
+
+                this.univerAPI?.createWorkbook(mergedData);
+                this.workbook = markRaw(
+                    this.univerAPI.getActiveWorkbook() as FWorkbook
+                ) as FWorkbook;
+
+                this.workbook.setActiveSheet(this.workbook.getSheets().at(-1)!);
+
+                (() => {
+                    const sheet = this.workbook?.getSheets()[0];
+                    const value = sheet!.getRange(0, 0, 1, 1).getValue?.();
+                    if (value == null || value === '') this.workbook?.deleteSheet(sheet!);
+                })();
+
+                this.initCommandListener();
+            }
         },
 
         async getSheetColHeader(sheetName: string, matrix: string[]) {
@@ -165,9 +205,15 @@ export const useUniverStore = defineStore('univer', {
         },
 
         async getFormulaInfo(formulaName: string) {
-            if (!this.formulaService || formulaName === '') return;
+            if (formulaName === '') return;
 
-            const formulaInfo = await this.formulaService.getDescription(formulaName);
+            if (!this.formulaDescriptions) {
+                this.formulaDescriptions = (
+                    this.univerAPI?.getFormula() as any
+                )._functionService._functionDescriptions;
+            }
+
+            const formulaInfo = await this.formulaDescriptions.get(formulaName);
 
             return formulaInfo;
         },
