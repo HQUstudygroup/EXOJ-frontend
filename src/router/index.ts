@@ -60,12 +60,4 @@ const router = createRouter({
     routes,
 });
 
-router.afterEach((to, from) => {
-    if (!from.name || !to.name) return;
-
-    if (from.name === 'index') return;
-
-    if (to.name === 'index') window.location.reload();
-});
-
 export default router;

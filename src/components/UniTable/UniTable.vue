@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { Univer, type FUniver } from '@univerjs/presets';
 import { UniverSheetsCorePreset } from '@univerjs/preset-sheets-core';
 import UniverPresetSheetsCoreZhCN from '@univerjs/preset-sheets-core/locales/zh-CN';
 import { UniverSheetsFilterPreset } from '@univerjs/preset-sheets-filter';
@@ -25,7 +24,7 @@ import '@univerjs/preset-sheets-sort/lib/index.css';
 import '@univerjs/preset-sheets-filter/lib/index.css';
 import '@univerjs/preset-sheets-hyper-link/lib/index.css';
 
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { onMounted, ref, onActivated, nextTick } from 'vue';
 
 import { useUniverStore } from '@/stores/univer';
 
@@ -36,11 +35,11 @@ defineProps<{
 const univerStore = useUniverStore();
 
 const container = ref<HTMLElement | null>(null);
+const isCreating = ref(false);
 
-let univerInstance: Univer | null = null;
-let univerAPIInstance: FUniver | null = null;
+async function initUnitable(savedData: any) {
+    if (!container.value) return;
 
-onMounted(async () => {
     const { univer, univerAPI } = createUniver({
         locale: LocaleType.ZH_CN,
         locales: {
@@ -61,18 +60,44 @@ onMounted(async () => {
         ],
     });
 
-    await univerAPI.createWorkbook({});
-
-    univerInstance = univer;
-    univerAPIInstance = univerAPI;
+    if (savedData) {
+        await univerAPI.createWorkbook(savedData);
+    } else {
+        await univerAPI.createWorkbook({});
+    }
 
     univerStore.setAPI(univerAPI);
+    isCreating.value = false;
+}
+
+async function recreateUnitable() {
+    if (isCreating.value) return;
+    isCreating.value = true;
+
+    let savedData = null;
+    if (univerStore.univerAPI) {
+        try {
+            const workbook = univerStore.univerAPI.getActiveWorkbook();
+            savedData = workbook?.save();
+        } catch (e) {
+            console.warn('保存数据失败', e);
+        }
+
+        univerStore.univerAPI.dispose?.();
+        univerStore.setAPI(null);
+    }
+
+    await nextTick();
+
+    initUnitable(savedData);
+}
+
+/** uniTable 生命周期管理 */
+onMounted(() => {
+    recreateUnitable();
 });
 
-onBeforeUnmount(() => {
-    univerInstance?.dispose();
-    univerAPIInstance?.dispose();
-    univerInstance = null;
-    univerAPIInstance = null;
+onActivated(() => {
+    recreateUnitable();
 });
 </script>

@@ -26,10 +26,13 @@ export const useUniverStore = defineStore('univer', {
         transferOptions: [] as { label: string; value: string }[],
 
         transferValues: [] as string[],
+
+        commandListenerDisposable: null as any,
     }),
 
     actions: {
-        setAPI(api: FUniver) {
+        setAPI(api: FUniver | null) {
+            if (!api) return;
             this.univerAPI = markRaw(api) as FUniver;
             (window as any).univerAPI = this.univerAPI;
             this.workbook = markRaw(this.univerAPI.getActiveWorkbook() as FWorkbook) as FWorkbook;
@@ -39,8 +42,20 @@ export const useUniverStore = defineStore('univer', {
             this.initCommandListener();
         },
 
+        clearCommandListener() {
+            if (this.commandListenerDisposable) {
+                // 如果 onCommandExecuted 返回了 disposable 对象
+                if (typeof this.commandListenerDisposable.dispose === 'function') {
+                    this.commandListenerDisposable.dispose();
+                }
+                this.commandListenerDisposable = null;
+            }
+        },
+
         initCommandListener() {
-            if (!this.workbook || this.reRenderStates) return;
+            if (!this.workbook) return;
+
+            this.clearCommandListener();
 
             this.reRenderStates = debounce(() => {
                 if (!this.workbook) return;
@@ -53,7 +68,7 @@ export const useUniverStore = defineStore('univer', {
 
                     const sheetName = sheetRange.getSheetName();
                     const sheetDataMatrix = sheetRange.getDisplayValues();
-                    this.getSheetColHeader(sheetName, sheetDataMatrix);
+                    this.getSheetColHeader(sheetName, sheetDataMatrix[0]);
 
                     return {
                         id: sheetRange.getSheetId(),
@@ -65,7 +80,7 @@ export const useUniverStore = defineStore('univer', {
                 });
             }, 200);
 
-            this.workbook.onCommandExecuted((command: any) => {
+            this.commandListenerDisposable = this.workbook.onCommandExecuted((command: any) => {
                 if (command.id.startsWith('sheet.mutation.')) {
                     this.reRenderStates();
                 }
@@ -82,6 +97,34 @@ export const useUniverStore = defineStore('univer', {
                 .map((item) => item[0]);
 
             return result;
+        },
+
+        getUniqueSheetName(desiredName: string, existingNames: string[]) {
+            if (!existingNames.includes(desiredName)) return desiredName;
+
+            const regex = /^(.+?)\s*\((\d+)\)$/;
+            const match = desiredName.match(regex);
+
+            let baseName: string;
+            let startNumber: number;
+
+            if (match) {
+                baseName = match[1];
+                startNumber = parseInt(match[2], 10);
+            } else {
+                baseName = desiredName;
+                startNumber = 1;
+            }
+
+            let newName = `${baseName} (${startNumber})`;
+            let counter = startNumber;
+
+            while (existingNames.includes(newName)) {
+                counter++;
+                newName = `${baseName} (${counter})`;
+            }
+
+            return newName;
         },
 
         async importExcel(file: File) {
@@ -102,14 +145,17 @@ export const useUniverStore = defineStore('univer', {
             sheet.getRange(0, 0, data.length, data[0].length).setValues(data);
 
             const sheetName = file.name.replace(/\.[^/.]+$/, '');
-            sheet.setName(sheetName);
+            const sheetNames = this.workbook.getSheets().map((sheet) => sheet.getSheetName());
+
+            const uniqueSheetName = this.getUniqueSheetName(sheetName, sheetNames);
+            sheet.setName(uniqueSheetName);
 
             this.workbook.setActiveSheet(sheet);
         },
 
-        async getSheetColHeader(sheetName: string, matrix: string[][]) {
+        async getSheetColHeader(sheetName: string, matrix: string[]) {
             this.transferOptions.push(
-                ...matrix[0]
+                ...matrix
                     .filter((item) => item !== '')
                     .map((item) => ({
                         label: `${sheetName} ─ ${item}`,
