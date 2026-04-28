@@ -52,7 +52,29 @@ async function exportUnitable(exportFileType: 'xlsx' | 'csv', univerAPI: any) {
         LuckyExcel.transformUniverToCsv({
             snapshot,
             fileName,
-            success: () => logger.success('导出成功'),
+            getBuffer: true,
+            success: (csvContent) => {
+                if (!csvContent) return;
+
+                Object.entries(csvContent).forEach(([name, data]) => {
+                    const blob = new Blob(
+                        ['\uFEFF' + data.split('data:text/csv;charset=utf-8,')[1]],
+                        {
+                            type: 'text/csv;charset=utf-8;',
+                        }
+                    );
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+
+                    link.href = url;
+                    link.download = `${name}.csv`;
+                    link.click();
+
+                    URL.revokeObjectURL(url);
+                });
+
+                logger.success(`导出成功`);
+            },
             error: (err) => logger.error(`导出失败: ${err}`),
         });
     } else logger.error('导出错误❌');
