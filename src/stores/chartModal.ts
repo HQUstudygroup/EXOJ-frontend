@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 
 import type { ChartTypes } from '@/models/chartTypes';
-import { CHART_PARAM_SCHEMA } from '@/services/chart/schema';
 
 import { useUniverStore } from './univer';
 
@@ -169,6 +168,7 @@ export const useChartModalStore = defineStore('chartModal', {
             );
 
             logger.warning('图表为空的话可能是数据问题', 8);
+            logger.info('查看图表请前往 → 查看分析结果');
 
             this.close();
         },

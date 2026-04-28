@@ -67,6 +67,7 @@ async function initUnitable(savedData: any) {
     }
 
     univerStore.setAPI(univerAPI);
+
     isCreating.value = false;
 }
 

@@ -423,7 +423,7 @@ const SheetFunctions = [
             },
             {
                 label: 'MIDB',
-                key: 'MINDB',
+                key: 'MIDB',
             },
             {
                 label: 'NUMBERSTRING',
@@ -1063,10 +1063,6 @@ const SheetFunctions = [
             {
                 label: 'SINH',
                 key: 'SINH',
-            },
-            {
-                label: 'SQRT',
-                key: 'SQRT',
             },
             {
                 label: 'SQRT',
@@ -1846,22 +1842,7 @@ const SheetFunctions = [
                 label: 'ISNONTEXT',
                 key: 'ISNONTEXT',
             },
-            {
-                label: 'ISNUMBER',
-                key: 'ISNUMBER',
-            },
-            {
-                label: 'ISODD',
-                key: 'ISODD',
-            },
-            {
-                label: 'ISREF',
-                key: 'ISREF',
-            },
-            {
-                label: 'ISTEXT',
-                key: 'ISTEXT',
-            },
+
             {
                 label: 'ISNUMBER',
                 key: 'ISNUMBER',
