@@ -22,6 +22,8 @@ declare module 'vue' {
     ChartZoomHeader: typeof import('./src/components/ChartsPart/ChartZoomHeader.vue')['default']
     ConfigurationPanel: typeof import('./src/components/DocumentStandardization/ConfigurationPanel.vue')['default']
     DataTable: typeof import('./src/components/fileMerge/DataTable.vue')['default']
+    FileConver: typeof import('./src/components/FileConver/FileConver.vue')['default']
+    FileConvert: typeof import('./src/components/FileConvert/FileConvert.vue')['default']
     FileMerge: typeof import('./src/components/file_merge/FileMerge.vue')['default']
     FilterArea: typeof import('./src/components/FilterModal/FilterArea.vue')['default']
     FilterFooter: typeof import('./src/components/FilterModal/FilterFooter.vue')['default']
