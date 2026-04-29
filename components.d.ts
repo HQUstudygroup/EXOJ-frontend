@@ -21,6 +21,7 @@ declare module 'vue' {
     ChartBox: typeof import('./src/components/ChartsPart/ChartBox.vue')['default']
     ChartZoomHeader: typeof import('./src/components/ChartsPart/ChartZoomHeader.vue')['default']
     ConfigurationPanel: typeof import('./src/components/DocumentStandardization/ConfigurationPanel.vue')['default']
+    ConvertUpload: typeof import('./src/components/FileConvert/ConvertUpload.vue')['default']
     DataTable: typeof import('./src/components/fileMerge/DataTable.vue')['default']
     FileConver: typeof import('./src/components/FileConver/FileConver.vue')['default']
     FileConvert: typeof import('./src/components/FileConvert/FileConvert.vue')['default']
