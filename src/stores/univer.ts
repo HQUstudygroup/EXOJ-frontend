@@ -139,8 +139,6 @@ export const useUniverStore = defineStore('univer', {
                 this.workbook = markRaw(
                     this.univerAPI.getActiveWorkbook() as FWorkbook
                 ) as FWorkbook;
-
-                this.initCommandListener();
             } else {
                 const randomId = `${Date.now()}_${Math.random().toString(36).substr(2, 8)}`;
 
@@ -187,10 +185,10 @@ export const useUniverStore = defineStore('univer', {
                     const value = sheet!.getRange(0, 0, 1, 1).getValue?.();
                     if (value == null || value === '') this.workbook?.deleteSheet(sheet!);
                 })();
-
-                this.initCommandListener();
-                this.reRenderStates();
             }
+
+            this.initCommandListener();
+            this.reRenderStates();
         },
 
         async getSheetColHeader(sheetName: string, matrix: string[]) {
