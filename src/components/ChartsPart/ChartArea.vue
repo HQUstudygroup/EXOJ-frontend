@@ -49,7 +49,10 @@
                         </n-popconfirm>
                     </div>
                     <t-chat-markdown
-                        class="mt-3 w-full h-full text-wrap overflow-auto px-20"
+                        :class="[
+                            'mt-3 max-w-full h-full text-wrap overflow-auto px-20 bg-slate-50 border-l-solid border-l-2 border-l-blue-600',
+                            displayTexts[index] ? 'pb-10 pt-5' : '',
+                        ]"
                         :content="displayTexts[index]"
                     />
                 </div>
@@ -94,61 +97,43 @@ const loading = ref(true);
 function handleAnalyze(index: number) {
     displayTexts.value[index] = '';
 
-    const content = `
-# This is TDesign
+    const content = `## 一、分析建议
 
-## This is TDesign
+频数分析用于研究数据分布情况，本次数据主要包含 K 线价格（open / close / high / low）以及成交量（volume）和消费金额等指标。
 
-### This is TDesign
-
-#### This is TDesign
-
-The point of reference-style links is not that they’re easier to write. The point is that with reference-style links, your document source is vastly more readable. Compare the above examples: using reference-style links, the paragraph itself is only 81 characters long; with inline-style links, it’s 176 characters; and as raw \`HTML\`, it’s 234 characters. In the raw \`HTML\`, there’s more markup than there is text.
-
-> This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet.
-
-an example | *an example* | **an example**
-
-1. Bird
-1. McHale
-1. Parish
-    1. Bird
-    1. McHale
-        1. Parish
-
-- Red
-- Green
-- Blue
-    - Red
-    - Green
-        - Blue
-
-This is [an example](http://example.com/ "Title") inline link.
-
-<http://example.com/>
-# TDesign（腾讯设计体系）核心特性与技术架构
-
-以下是关于 TDesign（腾讯设计体系）的核心特性与技术架构的表格化总结：
-
-| 分类 | 核心内容 | 关键技术/特性 |
-|------|----------|---------------|
-| **设计理念** | • 设计价值观：用户为本、科技向善、突破创新... | • 设计原子单元 |
-| **核心组件库** | • 基础组件：Button/Input/Table/Modal... | • 组件覆盖率  |
-| **技术特性** | • 多框架支持：Vue/React/Angular... | • 按需加载 |
-\`\`\`bash
-$ npm i tdesign-vue-next
-\`\`\`
+通过频数与占比分析，可以清晰反映数据的集中趋势与波动特征。
 
 ---
 
-\`\`\`javascript
-import { createApp } from 'vue';
-import App from './app.vue';
+## 二、智能分析
 
-const app = createApp(App);
-app.use(TDesignChat);
-\`\`\`
-  `;
+### （1）整体数据分析
+
+从整体数据来看：
+
+- 收盘价分布显示，样本中约 **45.00%** 集中在「110以上区间」，说明市场后期上涨趋势明显  
+- 成交量分布中，「40000 ~ 60000 区间」占比约 **50.00%**，为主要交易密集区  
+- 消费金额数据中，「300 ~ 800 区间」占比约 **62.00%**，属于核心消费人群  
+
+---
+
+### （2）进一步分析
+
+进一步分析可知：
+
+- 高成交量通常伴随价格上涨阶段，说明资金推动作用明显  
+- 最低价逐步上移，表明市场支撑增强  
+- 高消费用户占比约 **20.00%**，属于重点价值用户群体  
+
+---
+
+### （3）综合判断
+
+👉 因此可以判断：
+
+- 当前市场处于 **稳步上涨 + 结构健康** 阶段  
+- 用户消费结构呈现「中部集中，高端与低端分层」特征  
+- 后续应重点关注 **高价值用户** 与 **高成交量区间变化**`;
 
     streamText(content, (t) => {
         displayTexts.value[index] = t;

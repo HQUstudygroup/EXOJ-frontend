@@ -20,6 +20,12 @@ import { UniverSheetsSortPreset } from '@univerjs/preset-sheets-sort';
 import UniverPresetSheetsSortZhCN from '@univerjs/preset-sheets-sort/locales/zh-CN';
 import { UniverSheetsHyperLinkPreset } from '@univerjs/preset-sheets-hyper-link';
 import UniverPresetSheetsHyperLinkZhCN from '@univerjs/preset-sheets-hyper-link/locales/zh-CN';
+import { UniverSheetsFindReplacePreset } from '@univerjs/preset-sheets-find-replace';
+import UniverPresetSheetsFindReplaceZhCN from '@univerjs/preset-sheets-find-replace/locales/zh-CN';
+import { UniverSheetsNotePreset } from '@univerjs/preset-sheets-note';
+import UniverSheetsNoteZhCN from '@univerjs/preset-sheets-note/locales/zh-CN';
+import { UniverSheetsDrawingPreset } from '@univerjs/preset-sheets-drawing';
+import UniverSheetsDrawingZhCN from '@univerjs/preset-sheets-drawing/locales/zh-CN';
 import { createUniver, LocaleType, mergeLocales } from '@univerjs/presets';
 
 import '@univerjs/preset-sheets-core/lib/index.css';
@@ -50,7 +56,10 @@ async function initUnitable(savedData: any) {
                 UniverPresetSheetsCoreZhCN,
                 UniverPresetSheetsSortZhCN,
                 UniverPresetSheetsFilterZhCN,
-                UniverPresetSheetsHyperLinkZhCN
+                UniverPresetSheetsHyperLinkZhCN,
+                UniverPresetSheetsFindReplaceZhCN,
+                UniverSheetsNoteZhCN,
+                UniverSheetsDrawingZhCN
             ),
         },
         presets: [
@@ -60,6 +69,9 @@ async function initUnitable(savedData: any) {
             UniverSheetsSortPreset(),
             UniverSheetsFilterPreset(),
             UniverSheetsHyperLinkPreset(),
+            UniverSheetsFindReplacePreset(),
+            UniverSheetsNotePreset(),
+            UniverSheetsDrawingPreset(),
         ],
     });
 
