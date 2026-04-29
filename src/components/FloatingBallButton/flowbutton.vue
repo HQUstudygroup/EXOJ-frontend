@@ -20,22 +20,21 @@
 
         <div class="w-full h-full relative pointer-events-none">
             <img
-                src="/ai_ball.png"
+                src="@/assets/ai_ball.png"
                 class="w-full h-full rounded-full object-cover absolute inset-0 scale-115 transition-opacity duration-200 group-hover:opacity-0"
             />
 
             <img
-                src="/ai_twoball.png"
+                src="@/assets/ai_twoball.png"
                 class="w-full h-full rounded-full object-cover absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             />
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useAiAssistantStore } from '@/stores/aiAssistant';
+import { ref, computed } from 'vue';
 
-import { computed } from 'vue';
+import { useAiAssistantStore } from '@/stores/aiAssistant';
 
 const isRightSide = computed(() => {
     return x.value > window.innerWidth / 2;

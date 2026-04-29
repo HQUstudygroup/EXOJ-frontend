@@ -28,7 +28,7 @@ const routes = [
             {
                 name: 'format-files',
                 path: 'format-files',
-                component: () => import('@/views/formatStandardizationView.vue'),
+                component: () => import('@/views/FormatStandardizationView.vue'),
             },
             {
                 name: 'convert-files',

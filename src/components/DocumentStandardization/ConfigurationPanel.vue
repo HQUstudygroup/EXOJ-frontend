@@ -170,7 +170,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { ColumnConfig } from '@/views/formatStandardizationView.vue'; // 引入父组件定义的类型
+import type { ColumnConfig } from '@/views/FormatStandardizationView.vue'; // 引入父组件定义的类型
 
 const props = defineProps({
     show: {
