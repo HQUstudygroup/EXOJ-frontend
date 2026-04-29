@@ -1,4 +1,4 @@
-export function streamTextAutoSpeed(
+function streamText(
     text: string,
     onChunk: (current: string) => void,
     totalDuration = 2000 // 总时长（ms）
@@ -19,3 +19,5 @@ export function streamTextAutoSpeed(
 
     push();
 }
+
+export { streamText };

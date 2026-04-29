@@ -9,10 +9,6 @@
         />
 
         <div class="py-4 pr-8 flex items-center gap-3">
-            <n-button strong round :focusable="false" class="c-black bg-white b-solid b-0.5">
-                我的数据
-            </n-button>
-
             <n-button
                 strong
                 round
