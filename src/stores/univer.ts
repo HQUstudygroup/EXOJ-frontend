@@ -141,6 +141,7 @@ export const useUniverStore = defineStore('univer', {
                 ) as FWorkbook;
 
                 this.initCommandListener();
+                this.reRenderStates();
             } else {
                 const randomId = `${Date.now()}_${Math.random().toString(36).substr(2, 8)}`;
 
