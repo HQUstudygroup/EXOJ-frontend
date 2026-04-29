@@ -22,9 +22,9 @@
 <script setup lang="ts">
 import { useMergeFileStore } from '@/stores/mergeFiles';
 
-import MergeUploadBox from '@/components/fileMerge/MergeUploadBox.vue';
-import MergeExcel from '@/components/fileMerge/MergeExcel.vue';
-import Datatable from '@/components/fileMerge/MergeDataTable.vue';
+import MergeUploadBox from '@/components/FileMerge/MergeUploadBox.vue';
+import MergeExcel from '@/components/FileMerge/MergeExcel.vue';
+import Datatable from '@/components/FileMerge/MergeDataTable.vue';
 
 const mergeFileStore = useMergeFileStore();
 </script>
