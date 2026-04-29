@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full h-full justify-between">
-        <n-image lazy preview-disabled class="pl-15" src="@/assets/logo4.png" object-fit="fill" />
+        <n-image lazy preview-disabled class="pl-15" :src="logoImg" object-fit="fill" />
 
         <div class="py-4 pr-8 flex items-center gap-3">
             <n-button
@@ -45,6 +45,7 @@ import { useRouter } from 'vue-router';
 
 import { Sparkles } from '@vicons/ionicons5';
 
+import logoImg from '@/assets/logo4.png';
 import { useUniverStore } from '@/stores/univer';
 import { useAiAssistantStore } from '@/stores/aiAssistant';
 
