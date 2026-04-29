@@ -365,6 +365,20 @@ const formatCell = (val: any, col: ColumnConfig): any => {
 
         return col.rule === 'YYYY-MM-DD' ? `${y}-${m}-${d2}` : `${y}/${m}/${d2}`;
     }
+    if (col.type === 'boolean') {
+        const isChecked = /^(√|✓|✔|☑|✅|是|true|TRUE|True)$/i.test(v);
+
+        let result = '';
+        if (col.rule === '是/否') {
+            result = isChecked ? '是' : '否';
+        } else if (col.rule === 'TRUE/FALSE') {
+            result = isChecked ? 'TRUE' : 'FALSE';
+        } else {
+            result = isChecked ? '是' : '否';
+        }
+
+        return result;
+    }
 
     return v;
 };
@@ -498,6 +512,12 @@ const exportSingleFile = async (item: ProcessedFile) => {
 
             if (colConfig.type === 'money') {
                 cell.numFmt = '#,##0.00';
+            }
+            if (colConfig.type === 'boolean') {
+                cell.font = {
+                    name: '微软雅黑',
+                    size: 12,
+                };
             }
 
             cell.alignment = {
