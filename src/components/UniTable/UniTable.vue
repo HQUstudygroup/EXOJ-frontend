@@ -49,7 +49,7 @@ const isCreating = ref(false);
 async function initUnitable(savedData: any) {
     if (!container.value) return;
 
-    const { univer, univerAPI } = createUniver({
+    const { univerAPI } = createUniver({
         locale: LocaleType.ZH_CN,
         locales: {
             [LocaleType.ZH_CN]: mergeLocales(

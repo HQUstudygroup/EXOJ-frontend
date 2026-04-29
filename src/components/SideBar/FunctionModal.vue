@@ -89,7 +89,6 @@
 
 <script lang="ts" setup>
 import { useMenuStore } from '@/stores/menu';
-import { MemoryCursor } from '@univerjs/presets';
 
 import { NButton } from 'naive-ui';
 import { computed } from 'vue';
