@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import AssistantModal from '@/components/AssistantChat/AssistantModal.vue';
 import FunctionModal from '@/components/SideBar/FunctionModal.vue';
-import flowButton from '@/components/FloatingBallButton/flowButton.vue';
+import flowButton from '@/components/FloatingBallButton/FlowButton.vue';
 import HeaderArea from '@/components/Header/HeaderArea.vue';
 import AsideArea from '@/components/SideBar/AsideArea.vue';
 
