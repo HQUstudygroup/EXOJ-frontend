@@ -87,6 +87,7 @@ declare module 'vue' {
     NNumberAnimation: typeof import('naive-ui')['NNumberAnimation']
     NOption: typeof import('naive-ui')['NOption']
     NP: typeof import('naive-ui')['NP']
+    NPopconfirm: typeof import('naive-ui')['NPopconfirm']
     NProgress: typeof import('naive-ui')['NProgress']
     NResult: typeof import('naive-ui')['NResult']
     NScrollbar: typeof import('naive-ui')['NScrollbar']

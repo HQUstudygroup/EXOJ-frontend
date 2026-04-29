@@ -11,7 +11,7 @@
     >
         <n-result status="404" title="404 NotFound" description="抱歉！您访问的资源不存在">
             <template #footer>
-                <n-button type="primary" @click="goHome"> 返回主页面 </n-button>
+                <n-button type="primary" @click="router.push('/index')"> 返回主页面 </n-button>
             </template>
         </n-result>
     </div>
@@ -20,8 +20,4 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 const router = useRouter();
-
-const goHome = () => {
-    router.push('/home');
-};
 </script>

@@ -43,16 +43,6 @@ const routes = [
         component: () => import('@/views/WelcomeView.vue'),
     },
     {
-        name: 'upload',
-        path: '/upload',
-        component: () => import('@/views/UploadView.vue'),
-    },
-    {
-        name: 'updata',
-        path: '/updata',
-        component: () => import('@/views/UpdataView.vue'),
-    },
-    {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('@/views/NotFoundView.vue'),
