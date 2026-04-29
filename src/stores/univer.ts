@@ -139,6 +139,9 @@ export const useUniverStore = defineStore('univer', {
                 this.workbook = markRaw(
                     this.univerAPI.getActiveWorkbook() as FWorkbook
                 ) as FWorkbook;
+
+                this.initCommandListener();
+                this.reRenderStates();
             } else {
                 const randomId = `${Date.now()}_${Math.random().toString(36).substr(2, 8)}`;
 
