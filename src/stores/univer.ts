@@ -83,8 +83,6 @@ export const useUniverStore = defineStore('univer', {
                 if (command.id.startsWith('sheet.mutation.')) this.reRenderStates();
                 if (command.id === 'sheet.operation.set-worksheet-active') '';
             });
-
-            this.reRenderStates();
         },
 
         filterData(dataList: any[][], filterOutDataList: number[]) {
@@ -191,6 +189,7 @@ export const useUniverStore = defineStore('univer', {
                 })();
 
                 this.initCommandListener();
+                this.reRenderStates();
             }
         },
 

@@ -1,11 +1,7 @@
-export function streamTextAutoSpeed(
-    text: string,
-    onChunk: (current: string) => void,
-    totalDuration = 2000 // 总时长（ms）
-) {
+function streamText(text: string, onChunk: (current: string) => void) {
     const length = text.length;
 
-    const delay = Math.max(10, totalDuration / length);
+    const delay = Math.max(10, 2000 / length);
 
     let index = 0;
 
@@ -19,3 +15,5 @@ export function streamTextAutoSpeed(
 
     push();
 }
+
+export { streamText };

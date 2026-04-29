@@ -51,5 +51,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
     chart?.dispose();
     chart = null;
+
+    if (!el.value) return;
+    el.value.innerHTML = '';
 });
 </script>
