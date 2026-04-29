@@ -1941,26 +1941,6 @@ const SheetFunctions = [
     },
 ];
 
-/** 子选项 - 文件转换类别  @type {Array} */
-const FileTypeChange = [
-    {
-        label: 'Word To Excel',
-        key: 'wce',
-    },
-    {
-        label: 'PDF To Excel',
-        key: 'pce',
-    },
-    {
-        label: 'Excel To PDF',
-        key: 'ecp',
-    },
-    {
-        label: 'Excel To Word',
-        key: 'ecw',
-    },
-];
-
 /** 子选项 - 图的类别  @type {Array} */
 const DataVisualizationType = [
     { label: '折线图', key: 'line' },
@@ -1998,6 +1978,12 @@ const goFormatFilesView = {
     key: 'format-files',
 };
 
+/** 文件格式转换视图  @key convert-files */
+const goConvertFilesView = {
+    label: () => h(RouterLink, { to: { name: 'convert-files' } }, () => '文件格式转换'),
+    key: 'convert-files',
+};
+
 /** 主页视图  @key go-index */
 const goIndexView = {
     label: () => h(RouterLink, { to: { name: 'index' } }, () => '数据分析主页'),
@@ -2006,7 +1992,7 @@ const goIndexView = {
 
 export {
     SheetFunctions,
-    FileTypeChange,
+    goConvertFilesView,
     DataVisualizationType,
     goMergeFilesView,
     goFormatFilesView,

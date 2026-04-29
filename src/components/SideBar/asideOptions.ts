@@ -18,13 +18,11 @@ const asideOptions: MenuOption[] = [
     /** 文件格式标准化视图  @key format-files */
     asideOptionsParts.goFormatFilesView,
 
+    /** 文件格式转换视图  @key convert-files */
+    asideOptionsParts.goConvertFilesView,
+
     {
-        label: '文件格式转换',
-        key: 'change-file-type',
-        children: asideOptionsParts.FileTypeChange,
-    },
-    {
-        label: '表格函数',
+        label: '表格函数参考',
         key: 'sheet-functions',
         children: asideOptionsParts.SheetFunctions,
     },
