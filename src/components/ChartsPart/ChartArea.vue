@@ -49,7 +49,10 @@
                         </n-popconfirm>
                     </div>
                     <t-chat-markdown
-                        class="mt-3 w-full h-full text-wrap overflow-auto px-20"
+                        :class="[
+                            'mt-3 max-w-full h-full text-wrap overflow-auto px-20 bg-slate-50 border-l-solid border-l-2 border-l-blue-600',
+                            displayTexts[index] ? 'pb-10 pt-5' : '',
+                        ]"
                         :content="displayTexts[index]"
                     />
                 </div>
@@ -94,8 +97,7 @@ const loading = ref(true);
 function handleAnalyze(index: number) {
     displayTexts.value[index] = '';
 
-    const content = `
-## 一、分析建议
+    const content = `## 一、分析建议
 
 频数分析用于研究数据分布情况，本次数据主要包含 K 线价格（open / close / high / low）以及成交量（volume）和消费金额等指标。
 
@@ -109,9 +111,9 @@ function handleAnalyze(index: number) {
 
 从整体数据来看：
 
-- 收盘价分布显示，样本中约 **45.00%** 集中在「110以上区间」，说明市场后期上涨趋势明显  
-- 成交量分布中，「40000 ~ 60000 区间」占比约 **50.00%**，为主要交易密集区  
-- 消费金额数据中，「300 ~ 800 区间」占比约 **62.00%**，属于核心消费人群  
+- 收盘价分布显示，样本中约 **45.00%** 集中在「110以上区间」，说明市场后期上涨趋势明显
+- 成交量分布中，「40000 ~ 60000 区间」占比约 **50.00%**，为主要交易密集区
+- 消费金额数据中，「300 ~ 800 区间」占比约 **62.00%**，属于核心消费人群
 
 ---
 
@@ -119,9 +121,9 @@ function handleAnalyze(index: number) {
 
 进一步分析可知：
 
-- 高成交量通常伴随价格上涨阶段，说明资金推动作用明显  
-- 最低价逐步上移，表明市场支撑增强  
-- 高消费用户占比约 **20.00%**，属于重点价值用户群体  
+- 高成交量通常伴随价格上涨阶段，说明资金推动作用明显
+- 最低价逐步上移，表明市场支撑增强
+- 高消费用户占比约 **20.00%**，属于重点价值用户群体
 
 ---
 
@@ -129,10 +131,9 @@ function handleAnalyze(index: number) {
 
 👉 因此可以判断：
 
-- 当前市场处于 **稳步上涨 + 结构健康** 阶段  
-- 用户消费结构呈现「中部集中，高端与低端分层」特征  
-- 后续应重点关注 **高价值用户** 与 **高成交量区间变化**
-  `;
+- 当前市场处于 **稳步上涨 + 结构健康** 阶段
+- 用户消费结构呈现「中部集中，高端与低端分层」特征
+- 后续应重点关注 **高价值用户** 与 **高成交量区间变化**`;
 
     streamText(content, (t) => {
         displayTexts.value[index] = t;
