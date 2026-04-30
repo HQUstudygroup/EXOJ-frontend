@@ -39,6 +39,6 @@ pnpm dev
 **生产模式：**
 
 ```bash
-pnpm build
-pnpm start
+pnpm build # 浏览器访问: http://localhost:5173/
+pnpm preview # 浏览器访问: http://localhost:4173/
 ```
