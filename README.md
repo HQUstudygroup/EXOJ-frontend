@@ -33,12 +33,12 @@ VITE_API_BASE_URL=http://127.0.0.1:{port}/api
 **开发模式：**
 
 ```bash
-pnpm dev
+pnpm dev # 浏览器访问: http://localhost:5173/
 ```
 
 **生产模式：**
 
 ```bash
-pnpm build # 浏览器访问: http://localhost:5173/
+pnpm build
 pnpm preview # 浏览器访问: http://localhost:4173/
 ```
